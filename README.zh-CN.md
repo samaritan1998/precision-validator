@@ -4,7 +4,7 @@ Precision Validator 用于比较训练配置变化前后的完整梯度、实际
 
 默认 pip 安装只依赖 NumPy。运行模型时使用已有的 PyTorch、Slime 和 Megatron 环境。
 
-当前版本是 `0.3.0rc2`，发布验收尚未完成。实测范围和未完成项目见[验证记录](docs/validation.md)。
+当前版本是 `0.3.0rc3`，发布验收尚未完成。实测范围和未完成项目见[验证记录](docs/validation.md)。
 
 ## 安装与入口
 

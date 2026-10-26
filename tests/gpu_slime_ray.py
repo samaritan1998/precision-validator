@@ -54,7 +54,7 @@ def make(root):
 
 def arguments(source, root, output):
     return [str(source / 'train.py'), '--actor-num-nodes','1','--actor-num-gpus-per-node','2',
-        '--hf-checkpoint',str(root/'hf'), '--megatron-to-hf-mode','bridge',
+        '--hf-checkpoint',str(root/'hf'), '--load',str(root/'hf'), '--megatron-to-hf-mode','bridge',
         '--num-layers','2','--hidden-size','128','--ffn-hidden-size','256','--num-attention-heads','4',
         '--group-query-attention','--num-query-groups','4','--kv-channels','32','--seq-length','64',
         '--normalization','RMSNorm','--norm-epsilon','1e-6','--swiglu','--disable-bias-linear',
@@ -89,7 +89,10 @@ def launch(source, output):
     env.update(PYTHONPATH=str(source)+os.pathsep+os.environ['MEGATRON_PATH'],
         CUDA_DEVICE_MAX_CONNECTIONS='1', CUBLAS_WORKSPACE_CONFIG=':4096:8',
         OMP_NUM_THREADS='2', OPENBLAS_NUM_THREADS='1', RAY_USAGE_STATS_ENABLED='0',
-        NVTE_ALLOW_NONDETERMINISTIC_ALGO='0', WANDB_MODE='disabled')
+        NVTE_ALLOW_NONDETERMINISTIC_ALGO='0', WANDB_MODE='disabled',
+        RAY_EXPERIMENTAL_NOSET_ASCEND_RT_VISIBLE_DEVICES='1',
+        RAY_EXPERIMENTAL_NOSET_MUSA_VISIBLE_DEVICES='1',
+        RAY_EXPERIMENTAL_NOSET_SUPA_VISIBLE_DEVICES='1')
     # This process owns the local Ray cluster; shutdown only this cluster.
     for key in ('RANK','LOCAL_RANK','WORLD_SIZE','MASTER_ADDR','MASTER_PORT','PET_NODE_RANK','PET_NNODES','PET_NPROC_PER_NODE','RAY_ADDRESS'):
         os.environ.pop(key, None)

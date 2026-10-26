@@ -36,7 +36,9 @@ def main():
         input_wheel = root / wheel.name
         input_wheel.write_bytes(wheel_bytes)
         installed = root / "venv"
-        venv.create(installed, with_pip=True, system_site_packages=True)
+        # Preserve the stdlib location of relocatable standalone interpreters
+        # (notably Python 3.10 builds); copied binaries can point at /install.
+        venv.create(installed, with_pip=True, system_site_packages=True, symlinks=True)
         # A nested venv inherits the base interpreter's packages, not its
         # caller venv's NumPy/Torch. Reuse the explicitly supplied runtime
         # without installing or downloading training dependencies. The child

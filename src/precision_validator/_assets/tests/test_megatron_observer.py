@@ -102,6 +102,38 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(opt.prepare_grads,original_prepare)
         self.assertEqual(opt.step,original_step)
 
+    def test_fused_adam_group_counter_checked_on_final_step(self):
+        # TE fused Adam stores its counter in the parameter group. A final
+        # captured step has no subsequent before-step check to catch a freeze.
+        for counter in (1, 0, 2):
+            with self.subTest(counter=counter):
+                _, mapping, opt, writer, precision = self.fixture()
+                original_step = opt.optimizer.step
+                def fused_step():
+                    original_step()
+                    opt.optimizer.state[opt.master].pop('step')
+                    opt.optimizer.param_groups[0]['step'] = counter
+                opt.optimizer.step = fused_step
+                observer = NativeStepObserver(mapping, opt, writer, precision)
+                try:
+                    if counter == 1:
+                        with observer:
+                            opt.step()
+                        self.assertEqual(observer.receipt['optimizer_state_steps'], [1.0])
+                    else:
+                        with self.assertRaisesRegex(RuntimeError, 'step counter differs'):
+                            with observer:
+                                opt.step()
+                finally:
+                    writer.storage.close()
+
+    def test_nonfresh_fused_adam_group_counter_rejected(self):
+        _, mapping, opt, writer, precision = self.fixture()
+        opt.optimizer.param_groups[0]['step'] = 3
+        with self.assertRaisesRegex(RuntimeError, 'did not start fresh'):
+            with NativeStepObserver(mapping, opt, writer, precision):
+                pass
+
     def test_reused_optimizer_and_wrong_master_rejected(self):
         for kind in ('counter','moment','master'):
             with self.subTest(kind=kind):

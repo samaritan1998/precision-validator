@@ -1,6 +1,6 @@
 # 在 Slime 训练入口中开启精度对照
 
-开发版本：`precision-validator 0.3.0rc2`。这是 Slime 配套功能：用户沿用现有训练命令，通过参数指定验证步数和参考拓扑；无需为每个模型另写 `adapter.py`。
+开发版本：`precision-validator 0.3.0rc3`。这是 Slime 配套功能：用户沿用现有训练命令，通过参数指定验证步数和参考拓扑；无需为每个模型另写 `adapter.py`。
 
 当前首版仅支持同步 `train.py`、文本 SFT、HF 初始权重、全新原生 distributed Adam、单个模型 chunk。发布候选版的验证状态以 validation.md 为准，不能沿用旧镜像的通过结论。
 
@@ -249,7 +249,7 @@ TP/PP/EP 参数映射来自 Megatron 原生分片元数据；DP 参数所有权�
 安装 wheel 后执行一次：
 
 ```bash
-python -m pip install /path/to/precision_validator-0.3.0rc2-py3-none-any.whl
+python -m pip install /path/to/precision_validator-0.3.0rc3-py3-none-any.whl
 python -m precision_validator.slime_check install-bridge \
   --source /path/to/existing-slime \
   --destination /path/to/new-isolated-slime
@@ -276,4 +276,4 @@ python -m precision_validator.slime_check install-bridge \
 ## 发布验证状态
 
 当前是发布候选版，尚未完成最终验收。历史开发版结果不计入本版本通过数。
-各项结果和范围见 [validation.md](validation.md)。
+当前 B200、H800、A800 的小模型矩阵已完成：每种卡型 8 组通过、2 组 BF16 MoE 数值超差。完整 Ray 入口和真实 256K 对照仍在验证，不能把小模型结果扩大为这些范围的通过结论。各项结果和范围见 [validation.md](validation.md)。

@@ -17,6 +17,17 @@ from .sdk import torch_chunks
 from .storage import ShardWriter, index_pieces, verify_storage, CHUNK_ELEMENTS
 
 
+def adam_counter(row):
+    """Read PyTorch's parameter counter or native fused Adam's group counter."""
+    optimizer, parameter = row['state_optimizer'], row['state_parameter']
+    state = optimizer.state.get(parameter, {})
+    if 'step' in state:
+        return float(state['step'])
+    groups = [g for g in optimizer.param_groups if any(p is parameter for p in g['params'])]
+    require(len(groups) == 1, 'Native Adam parameter group ownership differs')
+    return float(groups[0].get('step', 0))
+
+
 def master_parameter(optimizer, parameter):
     """Read native master weights, including TE's signed BF16 remainders."""
     import torch
@@ -209,7 +220,7 @@ class NativeStepObserver:
         import torch
         for n, row in self.shards.items():
             state = row["state_optimizer"].state.get(row["state_parameter"], {})
-            require("step" not in state or float(state["step"]) == 0, "Optimizer did not start fresh")
+            require(adam_counter(row) == 0, "Optimizer did not start fresh")
             for key in ("exp_avg", "exp_avg_sq"):
                 require(key not in state or bool(torch.count_nonzero(state[key]) == 0), "Fresh Adam has nonzero moments")
 
@@ -269,8 +280,9 @@ class NativeStepObserver:
             for key in ("exp_avg", "exp_avg_sq"):
                 require(key in state and state[key].dtype == torch.float32 and bool(torch.isfinite(state[key]).all()),
                         "Missing/nonfinite/non-FP32 native Adam moments")
-            require("step" not in state or float(state["step"]) == self.step_number, "Native Adam step counter differs")
-            self.receipt["optimizer_state_steps"].append(float(state["step"]) if "step" in state else None)
+            counter = adam_counter(row)
+            require(counter == self.step_number, "Native Adam step counter differs")
+            self.receipt["optimizer_state_steps"].append(counter)
             values[n] = master.detach().float().cpu().reshape(-1) - self.before.pop(n)
         fragments, owners = collective_fragments(self.mapping, values, self.catalog, self.ranges)
         append_owned(self.writer, "updates", fragments, owners)

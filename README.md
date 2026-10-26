@@ -7,7 +7,7 @@ forward observations across implementations, precision settings, and parallel
 topologies. The default installation requires only NumPy; training adapters use
 your existing training environment.
 
-**Release candidate:** `0.3.0rc2`. Final release qualification is in progress.
+**Release candidate:** `0.3.0rc3`. Final release qualification is in progress.
 See [validation scope](docs/validation.md). Earlier image or development-wheel
 results do not certify this artifact.
 
@@ -119,7 +119,7 @@ approximately `24 * P * N` bytes for FP32 gradients and updates, plus scratch.
 ```bash
 python -m pip install build
 python -m build
-python scripts/verify_wheel.py --wheel dist/precision_validator-0.3.0rc2-py3-none-any.whl \
+python scripts/verify_wheel.py --wheel dist/precision_validator-0.3.0rc3-py3-none-any.whl \
   --tests tests --evidence ./test-results/installed
 ```
 

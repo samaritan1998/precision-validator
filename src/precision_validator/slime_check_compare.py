@@ -35,7 +35,11 @@ def load_stage(manifest, stage):
                     (row['stage'], row['step'], row['rank']) == (stage, step, rank), 'Step identity differs')
             require(row['optimizer_updated'] is True and row['observer']['optimizer_step_calls'] == 1 and
                     row['observer']['prepare_calls'] >= 1, 'Incomplete native optimizer execution')
-            require(all(v is None or v == step for v in row['observer']['optimizer_state_steps']), 'Adam step counters differ')
+            counters = row['observer']['optimizer_state_steps']
+            require(isinstance(counters, list) and
+                    (not row['storage']['pieces'] or counters) and
+                    all(type(v) in (int, float) and math.isfinite(v) and v == step for v in counters),
+                    'Adam step counters differ or are missing')
             require(row['precision']['gradients'] == row['precision']['optimizer_parameters'] ==
                     row['precision']['optimizer_state'] == 'float32', 'Native precision differs')
             if catalog is None:

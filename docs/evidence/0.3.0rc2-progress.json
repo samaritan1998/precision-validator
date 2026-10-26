@@ -1,0 +1,402 @@
+{
+  "version": "0.3.0rc2",
+  "wheel_sha256": "4810e067ecc60900c7157739d545ba14db8c769c403df47efc9790f2394da5a8",
+  "observed_utc": "2026-10-26T16:01:01.886680+00:00",
+  "release_status": "superseded_by_rc3_counter_fix",
+  "scope": "Synthetic two-layer native Slime rank loop; not full Ray or production Qwen",
+  "gpu_matrix": [
+    {
+      "hardware": "B200",
+      "cases": [
+        {
+          "case": "tp_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "pp_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "ep_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "tp_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "ep_bf16",
+          "numerical_status": "numerical_failure",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "cp2_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "cp4_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "tp2_cp2_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "combined_bf16",
+          "numerical_status": "numerical_failure",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "cpu_offload_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        }
+      ]
+    },
+    {
+      "hardware": "H800",
+      "cases": [
+        {
+          "case": "tp_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "pp_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "ep_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "tp_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "ep_bf16",
+          "numerical_status": "numerical_failure",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "cp2_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "cp4_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "tp2_cp2_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "combined_bf16",
+          "numerical_status": "numerical_failure",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "cpu_offload_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        }
+      ]
+    },
+    {
+      "hardware": "A800",
+      "cases": [
+        {
+          "case": "tp_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "pp_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "ep_fp32",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "tp_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "ep_bf16",
+          "numerical_status": "numerical_failure",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "cp2_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "cp4_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "tp2_cp2_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        },
+        {
+          "case": "combined_bf16",
+          "numerical_status": "numerical_failure",
+          "independent_metrics": "matched",
+          "metrics_checked": 1824
+        },
+        {
+          "case": "cpu_offload_bf16",
+          "numerical_status": "passed",
+          "independent_metrics": "matched",
+          "metrics_checked": 864
+        }
+      ]
+    }
+  ],
+  "independent_oracle": {
+    "reports": 30,
+    "metrics_checked": 34560,
+    "status": "all_matched",
+    "scope": "Full raw-vector reconstruction and global/per-parameter metric arithmetic; not independent semantic mapping proof"
+  },
+  "cpu": {
+    "3.10": {
+      "status": "passed",
+      "full_training_runtime": false,
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 138,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 48,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "e800bb8710851b11719c3fe234ad816bdefff44b448eca28acd382c2974ce8be"
+    },
+    "3.11": {
+      "status": "passed",
+      "full_training_runtime": false,
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 138,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 48,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "e800bb8710851b11719c3fe234ad816bdefff44b448eca28acd382c2974ce8be"
+    },
+    "3.12": {
+      "status": "passed",
+      "full_training_runtime": true,
+      "selftest": {
+        "status": "selftest_passed",
+        "tests_run": 138,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "5f25d4f140b622f300734bf97dd47b61419f39b73afaa5346400ed79a3bd7f2e"
+    },
+    "3.13": {
+      "status": "passed",
+      "full_training_runtime": false,
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 138,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 48,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "e800bb8710851b11719c3fe234ad816bdefff44b448eca28acd382c2974ce8be"
+    }
+  },
+  "extended": {
+    "B200": {
+      "suite_status": "failed",
+      "cases": {
+        "ray": {
+          "exit_code": 1,
+          "status": "failed"
+        },
+        "fp32_bf16_storage": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "cpu_offload_resume": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_llama": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_gemma": {
+          "exit_code": 0,
+          "status": "passed"
+        }
+      },
+      "qualification_sha256": "81a48216933cc22ed855e14c05f1f346ac92ade787cbcff82afeed0de4c4dedd",
+      "note": "Ray startup failure retained; corrected full Ray test is recorded separately"
+    },
+    "H800": {
+      "suite_status": "failed",
+      "cases": {
+        "ray": {
+          "exit_code": 1,
+          "status": "failed"
+        },
+        "fp32_bf16_storage": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "cpu_offload_resume": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_llama": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_gemma": {
+          "exit_code": 0,
+          "status": "passed"
+        }
+      },
+      "qualification_sha256": "a4f5febd7f2c8ae6daa178134e0d513ff9a8d1a3bc6d19bde1efd2d253e1993a",
+      "note": "Ray startup failure retained; corrected full Ray test is recorded separately"
+    },
+    "A800": {
+      "suite_status": "failed",
+      "cases": {
+        "ray": {
+          "exit_code": 1,
+          "status": "failed"
+        },
+        "fp32_bf16_storage": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "cpu_offload_resume": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_llama": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_gemma": {
+          "exit_code": 0,
+          "status": "passed"
+        }
+      },
+      "qualification_sha256": "83e08db1e2f0dbf1e582094e26b275b76d77251f0cccc8d0783c93f81c296186",
+      "note": "Ray startup failure retained; corrected full Ray test is recorded separately"
+    }
+  },
+  "full_ray": {
+    "B200": {
+      "status": "passed",
+      "steps": 3,
+      "report_sha256": "0bc8d746d049e6318a622a5a9d5b2dd806304864ee4b298587074f44a11ef278",
+      "upstream_slime_commit": "18868a79b0b083a093798a94ed0f8cb4f71b9c14",
+      "numerics": [
+        {
+          "step": 1,
+          "repeat": {
+            "gradients": 0.0,
+            "updates": 0.0
+          },
+          "candidate": {
+            "gradients": 0.0030946030377952166,
+            "updates": 0.013215938518985266
+          }
+        },
+        {
+          "step": 2,
+          "repeat": {
+            "gradients": 0.0,
+            "updates": 0.0
+          },
+          "candidate": {
+            "gradients": 0.004131800249631201,
+            "updates": 0.007523242194279468
+          }
+        },
+        {
+          "step": 3,
+          "repeat": {
+            "gradients": 0.0,
+            "updates": 0.0
+          },
+          "candidate": {
+            "gradients": 0.0038948087082410292,
+            "updates": 0.006461680398639933
+          }
+        }
+      ]
+    },
+    "H800": {
+      "status": "passed",
+      "steps": 3,
+      "report_sha256": "56eeac6540f461c67c919aadb343e0e5d4415c32dd7091e013828c521a2b2f24",
+      "counter_limitation": "rc2 did not require final native parameter-group counters; superseded by rc3"
+    },
+    "A800": {
+      "status": "passed",
+      "steps": 3,
+      "report_sha256": "b53f9d998654ea6dc984f9c799fc9030dfc250e01b63f1834b59013bf1c9d3a0",
+      "counter_limitation": "rc2 did not require final native parameter-group counters; superseded by rc3"
+    }
+  }
+}

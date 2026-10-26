@@ -4,7 +4,7 @@ from pathlib import Path
 import uuid
 
 from .common import require, save, read, digest, object_hash
-from .megatron_observer import NativeStepObserver, optimizer_shards, master_parameter
+from .megatron_observer import NativeStepObserver, optimizer_shards, master_parameter, adam_counter
 from .megatron_mapping import collective_fragments, append_owned
 from .sdk import RankWriter, runtime_info
 from .storage import ShardWriter
@@ -40,16 +40,6 @@ def class_metadata(value, classes, *, restore=False):
         require(not restore and classes.get(name) is value, 'Undeclared optimizer class metadata')
         return {'__native_optimizer_class__': name}
     return value
-
-
-def adam_counter(row):
-    optimizer, parameter = row['state_optimizer'], row['state_parameter']
-    state = optimizer.state.get(parameter, {})
-    if 'step' in state:
-        return float(state['step'])
-    groups = [g for g in optimizer.param_groups if any(p is parameter for p in g['params'])]
-    require(len(groups) == 1, 'Native Adam parameter group ownership differs')
-    return float(groups[0].get('step', 0))
 
 
 class NativeTrajectoryObserver(NativeStepObserver):

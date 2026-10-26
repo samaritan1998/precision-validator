@@ -64,6 +64,9 @@ def fixture(root, *, strict=True, bad=None):
                        scheduler_steps=step * 2, runtime={'torch': 'fixture'}, device='fixture-CPU', native_parallelism=groups,
                        optimizer_options=[{'lr': 0.01}],
                        observations={'loss': dict(shape=[], values=[1e6 if bad == 'loss' and stage == 'candidate' else 1.])})
+            if stage == 'candidate' and step == 3 and bad in ('counter_missing', 'counter_empty', 'counter_wrong'):
+                row['observer']['optimizer_state_steps'] = {
+                    'counter_missing': [None], 'counter_empty': [], 'counter_wrong': [2]}[bad]
             save(folder / 'rank0.json', row)
         save(root / stage / 'process.json', {'exit_code': 0, 'timed_out': False})
         seal_stage(manifest, stage)
@@ -192,6 +195,13 @@ if __name__ == "__main__":
             fixture(Path(d), bad='loss')
             report = compare(Path(d) / 'manifest.json')
             self.assertEqual(report['status'], 'numerical_failure')
+
+    def test_final_adam_counter_evidence_is_required(self):
+        for defect in ('counter_missing', 'counter_empty', 'counter_wrong'):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory() as d:
+                fixture(Path(d), bad=defect)
+                with self.assertRaisesRegex(ValidationError, 'Adam step counters'):
+                    compare(Path(d) / 'manifest.json')
 
     def test_no_policy_never_passed(self):
         with tempfile.TemporaryDirectory() as d:

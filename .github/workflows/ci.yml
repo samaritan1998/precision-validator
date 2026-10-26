@@ -22,7 +22,7 @@ jobs:
       - name: Test actual installation without training dependencies
         run: >-
           python scripts/verify_wheel.py
-          --wheel dist/precision_validator-0.3.0rc2-py3-none-any.whl
+          --wheel dist/precision_validator-0.3.0rc3-py3-none-any.whl
           --tests tests --evidence test-results/core
       - uses: actions/upload-artifact@v4
         if: always()
@@ -41,7 +41,7 @@ jobs:
       - run: python -m build
       - run: >-
           python scripts/verify_wheel.py
-          --wheel dist/precision_validator-0.3.0rc2-py3-none-any.whl
+          --wheel dist/precision_validator-0.3.0rc3-py3-none-any.whl
           --tests tests --evidence test-results/torch
       - uses: actions/upload-artifact@v4
         if: always()
