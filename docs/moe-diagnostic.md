@@ -1,4 +1,4 @@
-# Investigating the BF16 EP2 numerical failure
+# Investigating the BF16 MoE numerical failures
 
 The generated two-layer MoE fixture returns `numerical_failure` under the frozen
 5% local relative-L2 ceiling. This result remains a model numerical failure.
@@ -38,7 +38,32 @@ local gradient ceiling. This is consistent with routing amplifying earlier
 small differences, and establishes a real forward-computation divergence before
 gradient collection. It does not identify the first low-level operation that
 introduced the difference, prove that routing explains all error, or resolve
-the separate TP/PP/EP combined case.
+the separate TP/PP/EP combined case by itself.
+
+## TP2 / ETP2 / PP2 / EP2 combination
+
+A second B200 diagnostic traced the combined case. It reconstructed router
+observations by global layer, sample and token position, joining the TP sequence
+fragments and PP layer partitions independently of the gradient mapper.
+Reference repeat observations again match exactly. The instrumented run's
+complete three-step report is identical to the original combined run, and an
+independent calculation verified all 1,824 error metrics.
+
+On the second step, layer 2 selects experts `[1, 2]` in the reference and
+`[0, 1]` in the candidate for sample 0, token 5. This is a supervised token.
+The same step exceeds the local gradient gate: expert-0 `linear_fc2.weight`
+has relative L2 error 8.56594%, maximum absolute error `1.2494867133e-4`,
+absolute L2 `4.9816596912e-4`, and RMSE `1.1008016716e-5`.
+Steps one and three pass the frozen numerical gates.
+
+The third step also has a changed route, at sample 7, token 2. That position
+is in the masked prompt. A changed route alone is not an acceptance verdict;
+its effect depends on the supervised objective and subsequent computation.
+
+Both diagnostics establish actual forward differences upstream of the gradient
+collector. They support routing sensitivity as an amplification mechanism;
+they do not identify the first GEMM, normalization or reduction operation that
+introduced the difference. No model implementation or acceptance gate was changed.
 
 These are generated-fixture results. They do not establish that a production
 MoE model fails. The [release validation matrix](validation.md) retains both
@@ -79,3 +104,10 @@ python scripts/audit_router_trace.py \
 The trace analyzer is specific to this two-router, three-step fixture. It
 excludes padded tokens, aligns calls by sample and rank, and preserves the
 hashes of every input trace. It is not a generic production-model adapter.
+
+For the combined case, copy a fresh `tests/gpu_slime_matrix.py` to a different
+diagnostic directory and apply `tests/moe_combined_router_trace.patch` instead.
+Run with `--cases combined_bf16` and a new output directory. Each stage uses
+eight GPUs, so the launcher reuses that allocation sequentially. Audit its
+completed `combined_bf16` directory using `audit_small_report.py` and
+`audit_combined_router_trace.py` with the same `--results`/`--output` arguments.

@@ -27,8 +27,13 @@ Wheel SHA-256:
 - B200, H800 and A800 completed the full Ray entry, native
   precision/offload/resume, and HF adapter integration tests. All five extended
   integration tests passed on each device family, within their scopes below.
-- A new three-stage Qwen 256K comparison is running with rc3, unchanged inputs,
-  model computation and frozen numerical gates. There is no numerical verdict yet.
+- All three Qwen 256K training steps completed with rc3 and unchanged gates.
+  Full raw validation and comparison remain in progress. Preliminary receipt
+  observations show exact reference-repeat loss and hidden samples, but the
+  combined TP2/CP2 candidate exceeds forward gates: last-layer sampled hidden
+  relative L2 is 5.28986% against a 2% ceiling, with maximum absolute error
+  1.6875. Candidate loss relative error is 0.225959%, maximum absolute error
+  0.0007754334. This configuration cannot be called a numerical pass.
 - Final production-model qualification and GitHub publication are incomplete.
 
 The [rc3 evidence snapshot](evidence/0.3.0rc3-progress.json) is kept separately.
@@ -87,10 +92,11 @@ For that H800 parameter, maximum absolute error is `1.3268210023e-4`, absolute
 L2 is `6.3246108240e-4`, and RMSE is `1.3975547506e-5`.
 They remain numerical failures; no tolerance was changed after execution.
 A separate B200 EP2 trace found a real native router expert-choice change at
-step three. Its complete reported step results match the uninstrumented run;
-another 1,824 metrics were independently verified. See the
+step three. A TP/PP/EP trace also found a real expert-choice change on its
+failing second step. Both complete reports match their uninstrumented runs;
+another 1,824 metrics per diagnostic were independently verified. See the
 [diagnostic and reproduction steps](moe-diagnostic.md). The first operation
-introducing the difference and the separate combined case remain unresolved.
+introducing the difference remains unresolved.
 These findings do not establish that another MoE model or production
 configuration fails.
 
@@ -134,3 +140,20 @@ The initial release does not claim arbitrary models, all topology combinations,
 long-run convergence, or semantic correctness from numerical agreement alone.
 Checkpoint-resume trajectory adapters and the Slime bounded-run entry expose
 different evidence scopes; consult the specific report's coverage fields.
+
+## Machine-readable matrix qualification
+
+`scripts/write_release_record.py` checks the exact wheel, installed package
+bytes, complete CPU coverage, report hashes and required GPU cases. It writes
+`numerical_failure` when complete cases exceed their frozen gates, and
+`incomplete` for missing or failed executions. Neither status qualifies a
+release; the command exits nonzero. The
+[current matrix record](evidence/0.3.0rc3-matrix-record.json) retains all six
+numerical failures and no missing cases.
+
+Completed, hash-matched cases from an interrupted suite may be combined with
+nonoverlapping recovery cases. The record preserves each source snapshot hash
+and matrix status; unfinished cases never count. Five additional CPU tests
+cover failures, incomplete evidence, changed reports and duplicate cases.
+This matrix record does not include production-model qualification or certify
+arbitrary input adapters.

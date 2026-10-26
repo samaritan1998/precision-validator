@@ -1,0 +1,162 @@
+{
+  "status": "numerical_failure",
+  "version": "0.3.0rc3",
+  "wheel": "precision_validator-0.3.0rc3-py3-none-any.whl",
+  "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+  "evidence": [
+    {
+      "kind": "cpu",
+      "summary_sha256": "cce0d17067465945e8b464887b8d8e80b66887ca8ef5c402800a4a55caf5a713",
+      "selftest": {
+        "status": "selftest_passed",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "gpu_acceptance": false
+      },
+      "native": true
+    },
+    {
+      "kind": "cpu",
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 50,
+        "gpu_acceptance": false
+      },
+      "native": false
+    },
+    {
+      "kind": "cpu",
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 50,
+        "gpu_acceptance": false
+      },
+      "native": false
+    },
+    {
+      "kind": "cpu",
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 50,
+        "gpu_acceptance": false
+      },
+      "native": false
+    },
+    {
+      "kind": "gpu",
+      "device_family": "blackwell",
+      "device": "CF-NG-BZZ2-O",
+      "qualification_sha256": "a1898ae262b97a87d2b81fa96cb18fad89f16fcb9717a056297ee4a57e9cf7c7",
+      "matrix_status_at_snapshot": "running",
+      "cases": [
+        "cp2_bf16",
+        "cp4_bf16",
+        "ep_bf16",
+        "ep_fp32",
+        "pp_fp32",
+        "tp2_cp2_bf16",
+        "tp_bf16",
+        "tp_fp32"
+      ]
+    },
+    {
+      "kind": "gpu",
+      "device_family": "blackwell",
+      "device": "CF-NG-BZZ2-O",
+      "qualification_sha256": "32f3631f78258dced5ad70d9315436131a32d6b2fa192222dae65b53bbb7292d",
+      "matrix_status_at_snapshot": "failed",
+      "cases": [
+        "combined_bf16",
+        "cpu_offload_bf16"
+      ]
+    },
+    {
+      "kind": "gpu",
+      "device_family": "hopper",
+      "device": "NVIDIA H800",
+      "qualification_sha256": "fc48ed6b144cb6f1a143dc2eb24864443c8368ce6be2fd5de1c311300fa7f524",
+      "matrix_status_at_snapshot": "failed",
+      "cases": [
+        "combined_bf16",
+        "cp2_bf16",
+        "cp4_bf16",
+        "cpu_offload_bf16",
+        "ep_bf16",
+        "ep_fp32",
+        "pp_fp32",
+        "tp2_cp2_bf16",
+        "tp_bf16",
+        "tp_fp32"
+      ]
+    },
+    {
+      "kind": "gpu",
+      "device_family": "ampere",
+      "device": "NVIDIA A800-SXM4-80GB",
+      "qualification_sha256": "661f8a20c7016d350fddac836e64a5393a8bbdc48e138ca8fc0addda1c65e3e9",
+      "matrix_status_at_snapshot": "failed",
+      "cases": [
+        "combined_bf16",
+        "cp2_bf16",
+        "cp4_bf16",
+        "cpu_offload_bf16",
+        "ep_bf16",
+        "ep_fp32",
+        "pp_fp32",
+        "tp2_cp2_bf16",
+        "tp_bf16",
+        "tp_fp32"
+      ]
+    }
+  ],
+  "coverage_policy_sha256": "efa26ecd2a2850bcd4f99e735c9405f7d70ab1d522151f4ecc30fa2354d475a2",
+  "missing_gpu_coverage": {},
+  "numerical_failures": [
+    {
+      "device_family": "blackwell",
+      "case": "ep_bf16",
+      "report_sha256": "c662e8269c2420197ea2fc0ac7e8d8a2f08e221f755aef711f06a93d7b793606"
+    },
+    {
+      "device_family": "blackwell",
+      "case": "combined_bf16",
+      "report_sha256": "935fc9fcf808828eb82ff7989273610c52de44a091459e1315a68547b359464f"
+    },
+    {
+      "device_family": "hopper",
+      "case": "ep_bf16",
+      "report_sha256": "67961ce5aac6d2bd562624421b6eee106fc6c383f65d46f8ef730aa446d0c352"
+    },
+    {
+      "device_family": "hopper",
+      "case": "combined_bf16",
+      "report_sha256": "f096859d57995b4b391059657cbfadadab7fd148b9092fdff2a5b8154da00ee2"
+    },
+    {
+      "device_family": "ampere",
+      "case": "ep_bf16",
+      "report_sha256": "cb208989249f7507ee14c2a789c4987b0101acf9fea67ef7eebc320bc5711122"
+    },
+    {
+      "device_family": "ampere",
+      "case": "combined_bf16",
+      "report_sha256": "e0a5be947a0c046f24c576b0e93f759f9fea94594d7a0272c1969cf8be1f6f6d"
+    }
+  ],
+  "execution_failures": [],
+  "scope": "Only the exact supplied wheel, hardware and cases; numerical failures remain failures; no implied production-model coverage"
+}
