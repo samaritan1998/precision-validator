@@ -1,0 +1,38 @@
+{
+  "ampere": [
+    "cp2_bf16",
+    "tp_fp32",
+    "pp_fp32",
+    "ep_fp32",
+    "tp_bf16",
+    "ep_bf16",
+    "cp4_bf16",
+    "tp2_cp2_bf16",
+    "combined_bf16",
+    "cpu_offload_bf16"
+  ],
+  "hopper": [
+    "cp2_bf16",
+    "tp_fp32",
+    "pp_fp32",
+    "ep_fp32",
+    "tp_bf16",
+    "ep_bf16",
+    "cp4_bf16",
+    "tp2_cp2_bf16",
+    "combined_bf16",
+    "cpu_offload_bf16"
+  ],
+  "blackwell": [
+    "cp2_bf16",
+    "tp_fp32",
+    "pp_fp32",
+    "ep_fp32",
+    "tp_bf16",
+    "ep_bf16",
+    "cp4_bf16",
+    "tp2_cp2_bf16",
+    "combined_bf16",
+    "cpu_offload_bf16"
+  ]
+}

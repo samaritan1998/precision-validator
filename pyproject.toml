@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "precision-validator"
+dynamic = ["version"]
+description = "Model-independent gradient, optimizer, topology and resume validation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+dependencies = ["numpy>=1.24"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+torch = ["torch>=2.5"]
+hf = ["torch>=2.5", "transformers>=4.48", "safetensors>=0.4"]
+dev = ["build>=1.2", "twine>=6"]
+
+[project.scripts]
+precisionctl = "precision_validator.__main__:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "precision_validator.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["precision_validator"]
+namespaces = false
+
+[tool.setuptools.package-data]
+precision_validator = [
+  "_assets/*.json",
+  "_assets/profiles/*.json",
+  "_assets/policies/*.json",
+  "_assets/examples/*.py",
+  "_assets/examples/hf_causal_lm/*.py",
+  "_assets/tests/*.py",
+]

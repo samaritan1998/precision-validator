@@ -1,0 +1,12 @@
+Precision Validator
+
+This distribution contains validation and integration code, not the Slime,
+Megatron-LM, PyTorch, Transformer Engine, or Flash Linear Attention projects.
+Those projects remain separately installed dependencies with their own licenses.
+
+The Slime bridge installer recognizes small source boundaries in the external
+Slime training entry and modifies only a newly created copy. Slime is distributed
+under the Apache License, Version 2.0: https://github.com/THUDM/slime.
+
+Model weights, training datasets, vendor runtime images, cluster configuration,
+credentials, and historical raw training tensors are not part of this repository.

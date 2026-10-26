@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "qwen-noise-v1",
+  "description": "Inherited repeat ceilings and noise rule; explicit target ceilings equal 1.25x repeat ceilings. Absolute metrics reported; no uncalibrated absolute threshold is asserted.",
+  "gradients": {
+    "repeat_relative_ceiling": 0.02,
+    "target_relative_ceiling": 0.025,
+    "noise_multiplier": 1.25,
+    "noise_slack": 0.0005,
+    "max_abs_ceiling": null,
+    "rmse_ceiling": null
+  },
+  "updates": {
+    "repeat_relative_ceiling": 0.1,
+    "target_relative_ceiling": 0.125,
+    "noise_multiplier": 1.25,
+    "noise_slack": 0.005,
+    "max_abs_ceiling": null,
+    "rmse_ceiling": null
+  }
+}
