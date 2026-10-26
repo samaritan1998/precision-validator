@@ -86,8 +86,13 @@ expert gradient has about 12.6% relative L2 error against a 5% local ceiling.
 For that H800 parameter, maximum absolute error is `1.3268210023e-4`, absolute
 L2 is `6.3246108240e-4`, and RMSE is `1.3975547506e-5`.
 They remain numerical failures; no tolerance was changed after execution.
-Their training-computation root cause has not been established. These findings
-do not establish that another MoE model or production configuration fails.
+A separate B200 EP2 trace found a real native router expert-choice change at
+step three. Its complete reported step results match the uninstrumented run;
+another 1,824 metrics were independently verified. See the
+[diagnostic and reproduction steps](moe-diagnostic.md). The first operation
+introducing the difference and the separate combined case remain unresolved.
+These findings do not establish that another MoE model or production
+configuration fails.
 
 An independent NumPy implementation reconstructs every canonical element from
 the saved rank fragments. Across all 30 reports, all 34,560 global and

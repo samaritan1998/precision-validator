@@ -271,9 +271,9 @@ python -m precision_validator.slime_check install-bridge \
 - 首版不支持 `train_async.py`、RL 在线生成、多模态、virtual pipeline、多个模型 chunk、自定义 before-step hook 或 stateful model buffers。
 - 从 checkpoint 恢复后的中途抽检，以及“验证通过后继续当前训练”尚未接入本入口。
 - TP/PP/CP/EP 是否能够通过，需要在实际模型、卡型、输入和配置上运行；不能由接口支持这些轴推导所有组合已通过。
-- 当前 GPU 集成用例是两层小模型、TP1/TP2、每轮 3 步，同时检查原生训练循环的步数上限。它不替代生产 Qwen 256K 或完整 Ray 驱动验收。
+- 当前 GPU 并行矩阵使用两层小模型，覆盖 TP、PP、EP、CP 及部分组合，每轮 3 步。另有完整 Ray 驱动测试，检查三轮实际训练和步数上限；这些结果不替代生产 Qwen 256K 验收。
 
 ## 发布验证状态
 
 当前是发布候选版，尚未完成最终验收。历史开发版结果不计入本版本通过数。
-当前 B200、H800、A800 的小模型矩阵已完成：每种卡型 8 组通过、2 组 BF16 MoE 数值超差。完整 Ray 入口和真实 256K 对照仍在验证，不能把小模型结果扩大为这些范围的通过结论。各项结果和范围见 [validation.md](validation.md)。
+当前 B200、H800、A800 的小模型矩阵已完成：每种卡型 8 组通过、2 组 BF16 MoE 数值超差。三种卡型的完整 Ray 入口、存储精度、优化器卸载和恢复集成测试均已完成。真实 Qwen 256K 对照仍在运行，尚无数值结论。各项结果和范围见 [validation.md](validation.md)。

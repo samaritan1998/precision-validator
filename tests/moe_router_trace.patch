@@ -1,0 +1,59 @@
+--- gpu_slime_matrix.py
++++ gpu_slime_matrix.py
+@@ -180,6 +180,26 @@
+         loss_masks=[torch.tensor(data['loss_masks'][i], device='cuda') for i in samples],
+         rollout_mask_sums=[sum(data['loss_masks'][i]) for i in samples], max_seq_lens=[64] * len(samples))
+     iterator = Iterator(rollout, [[i] for i in range(len(samples))])
++    # Read-only forward traces: no tensor modification or backward replacement.
++    trace_rows = {}
++    trace_handles = []
++    def route_trace(name):
++        rows = trace_rows.setdefault(name, [])
++        def hook(router, inputs, output):
++            index = len(rows)
++            probabilities, routes = output
++            row = dict(call=index, sample_index=samples[index],
++                input=inputs[0].detach().float().cpu().numpy(),
++                probabilities=probabilities.detach().float().cpu().numpy(),
++                routes=routes.detach().cpu().numpy(),
++                weight=router.weight.detach().float().cpu().numpy().copy())
++            rows.append(row)
++        return hook
++    from megatron.core.transformer.moe.router import TopKRouter
++    for name, component in module.named_modules():
++        if isinstance(component, TopKRouter):
++            trace_handles.append(component.register_forward_hook(route_trace(name)))
++    require(len(trace_handles) == 2, 'Expected both fixture routers')
+     # Observe the true denominator after native DP x CP reduction; do not change gradients.
+     denominators = []
+     finalize_name = '_finalize_model_grads' if hasattr(training, '_finalize_model_grads') else 'finalize_model_grads'
+@@ -199,6 +219,20 @@
+     require(len(denominators) == 3, 'Missing gradient finalization')
+     save(Path(manifest['output']) / stage / f'denominator-rank{dist.get_rank()}.json',
+         dict(actual=denominators, supervised_units=data['supervised_units'], cp=layout['cp']))
++    for handle in trace_handles:
++        handle.remove()
++    payload, trace_index = {}, []
++    for name, rows in trace_rows.items():
++        require(len(rows) == 12, 'Expected 12 microbatches for each router')
++        for row in rows:
++            prefix = f"{name}/{row['call']}"
++            trace_index.append(dict(router=name, call=row['call'], sample_index=row['sample_index'], prefix=prefix))
++            for field in ('input','probabilities','routes','weight'):
++                payload[prefix+'/'+field] = row[field]
++    folder = Path(manifest['output'])/stage
++    np.savez(folder/f'router-trace.rank{dist.get_rank()}.npz', **payload)
++    save(folder/f'router-trace.rank{dist.get_rank()}.json', dict(rows=trace_index,
++        rank=dist.get_rank(), dp_rank=ps.get_data_parallel_rank(), scope='read_only_forward_hooks'))
+     ps.destroy_model_parallel()
+     dist.destroy_process_group()
+ 
+@@ -257,7 +291,7 @@
+ def launch(output, source, cases, wheel):
+     import torch
+     import precision_validator
+-    require(torch.cuda.device_count() >= 8, 'Full release matrix requires eight allocated GPUs')
++    require(torch.cuda.device_count() == 8, 'Router diagnostic requires the eight allocated GPUs')
+     output.mkdir(parents=True, exist_ok=True)
+     output = output / ('execution-' + uuid.uuid4().hex)
+     output.mkdir()

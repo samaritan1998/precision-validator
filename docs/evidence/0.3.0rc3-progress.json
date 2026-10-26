@@ -2,7 +2,7 @@
   "version": "0.3.0rc3",
   "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
   "status": "incomplete",
-  "observed_utc": "2026-10-26T17:21:43.203639+00:00",
+  "observed_utc": "2026-10-26T18:51:40.613450+00:00",
   "cpu": {
     "3.10": {
       "status": "passed",
@@ -15,7 +15,19 @@
         "skipped": 50,
         "gpu_acceptance": false
       },
-      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31"
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "python": "3.10.20",
+      "packages": {
+        "numpy": "2.2.6",
+        "torch": null,
+        "transformers": null,
+        "safetensors": null,
+        "transformer-engine": null,
+        "fla-core": null,
+        "triton": null,
+        "megatron-core": null
+      },
+      "environment_sha256": "07ddb57a26d90e2d54853b1b6be923f349c5c382b7e3f98e20558c702b41c68d"
     },
     "3.11": {
       "status": "passed",
@@ -28,7 +40,19 @@
         "skipped": 50,
         "gpu_acceptance": false
       },
-      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31"
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "python": "3.11.15",
+      "packages": {
+        "numpy": "2.4.6",
+        "torch": null,
+        "transformers": null,
+        "safetensors": null,
+        "transformer-engine": null,
+        "fla-core": null,
+        "triton": null,
+        "megatron-core": null
+      },
+      "environment_sha256": "0b42429ee3a44cbbd5d9a902143b2c42a19a8240787973e8141e4264dce8601d"
     },
     "3.12": {
       "status": "passed",
@@ -41,7 +65,19 @@
         "skipped": 0,
         "gpu_acceptance": false
       },
-      "summary_sha256": "cce0d17067465945e8b464887b8d8e80b66887ca8ef5c402800a4a55caf5a713"
+      "summary_sha256": "cce0d17067465945e8b464887b8d8e80b66887ca8ef5c402800a4a55caf5a713",
+      "python": "3.12.3",
+      "packages": {
+        "numpy": "1.26.4",
+        "torch": "2.11.0+cu129",
+        "transformers": "5.6.0",
+        "safetensors": "0.7.0",
+        "transformer-engine": "2.10.0",
+        "fla-core": "0.4.1",
+        "triton": "3.6.0",
+        "megatron-core": "0.16.0rc0"
+      },
+      "environment_sha256": "b56da3dcf866eafddf157cc98bd602fe28dfa6098a9a271c799c5726e8fa0454"
     },
     "3.13": {
       "status": "passed",
@@ -54,7 +90,19 @@
         "skipped": 50,
         "gpu_acceptance": false
       },
-      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31"
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "python": "3.13.12",
+      "packages": {
+        "numpy": "2.4.6",
+        "torch": null,
+        "transformers": "5.13.0",
+        "safetensors": "0.8.0",
+        "transformer-engine": null,
+        "fla-core": null,
+        "triton": null,
+        "megatron-core": null
+      },
+      "environment_sha256": "3c19c33befe37145d275b34e3aa90cb73d29551faaa7a97612fedc1c8d276b31"
     }
   },
   "gpu": {
@@ -390,5 +438,222 @@
       "checked_metrics": 864,
       "report_sha256": "1f3019a2c2198747d30eaabd487993dd19ed7cb1fd5f09393a8c20c1b34d1047"
     }
+  },
+  "moe_ep2_diagnostic": {
+    "device": "B200",
+    "status": "numerical_failure",
+    "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+    "reported_step_results_identical_to_uninstrumented_run": true,
+    "independent_metrics_verified": 1824,
+    "report_sha256": "1186e340ee43d2014e5dfef72f5eab2a809bee6ec55e66425bb2407d9ab650b6",
+    "test_sha256": "be1375fd0a4df8df6fc024df86adef3d1d82467d772dfb38247a700f76cced69",
+    "trace_sha256": "e0873983f9033512e60fbc84220d303704443497cc458cde1663abbda646c587",
+    "summary": {
+      "repeat": [
+        {
+          "step": 1,
+          "layer": 0,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 1,
+          "layer": 1,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 2,
+          "layer": 0,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 2,
+          "layer": 1,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 3,
+          "layer": 0,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 3,
+          "layer": 1,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "step": 1,
+          "layer": 0,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 1,
+          "layer": 1,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 2,
+          "layer": 0,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.0,
+            "weight": 0.0,
+            "probabilities": 0.0
+          }
+        },
+        {
+          "step": 2,
+          "layer": 1,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.015625,
+            "weight": 0.0,
+            "probabilities": 0.0002703368663787842
+          }
+        },
+        {
+          "step": 3,
+          "layer": 0,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 0,
+          "maximum_absolute": {
+            "input": 0.015625,
+            "weight": 0.0001220703125,
+            "probabilities": 0.00043529272079467773
+          }
+        },
+        {
+          "step": 3,
+          "layer": 1,
+          "calls": 8,
+          "valid_tokens": 248,
+          "route_flip_tokens": 1,
+          "maximum_absolute": {
+            "input": 0.03125,
+            "weight": 3.814697265625e-06,
+            "probabilities": 0.47726866602897644
+          }
+        }
+      ]
+    },
+    "route_flips": [
+      {
+        "stage": "candidate",
+        "rank": 1,
+        "router": "decoder.layers.1.mlp.router",
+        "call": 11,
+        "step": 3,
+        "sample_index": 7,
+        "valid_tokens": 45,
+        "route_flip_tokens": 1,
+        "flips": [
+          {
+            "token": 13,
+            "supervised": true,
+            "reference_experts": [
+              0,
+              2
+            ],
+            "candidate_experts": [
+              0,
+              3
+            ],
+            "reference_probabilities": [
+              0.5227313041687012,
+              0.0,
+              0.47726866602897644,
+              0.0
+            ],
+            "candidate_probabilities": [
+              0.5227553248405457,
+              0.0,
+              0.0,
+              0.47724467515945435
+            ]
+          }
+        ],
+        "differences": {
+          "input": {
+            "max_abs": 0.03125,
+            "absolute_l2": 0.11063025217274104,
+            "relative_l2": 0.002943385764735159
+          },
+          "weight": {
+            "max_abs": 3.814697265625e-06,
+            "absolute_l2": 3.996623662529042e-06,
+            "relative_l2": 1.8276591836094316e-05
+          },
+          "probabilities": {
+            "max_abs": 0.47726866602897644,
+            "absolute_l2": 0.6749437045791044,
+            "relative_l2": 0.1421530809640545
+          }
+        }
+      }
+    ],
+    "first_low_level_difference_identified": false,
+    "combined_case_root_cause_identified": false
   }
 }

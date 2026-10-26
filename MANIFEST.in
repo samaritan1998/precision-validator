@@ -5,3 +5,4 @@ recursive-include scripts *.py
 recursive-exclude * __pycache__ *.pyc
 include README.zh-CN.md
 include tests/*.json
+include tests/*.patch
