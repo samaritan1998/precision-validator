@@ -2,8 +2,8 @@
 
 The `0.3.0rc3` candidate is under validation. It is not a final qualified release.
 It adds a required final-step check for native Adam parameter-group counters.
-The completed results below belong to **rc2**, before that check was added;
-they do not certify the rc3 artifact. New rc3 evidence will be recorded separately.
+The current rc3 results and the historical rc2 results are recorded separately;
+an older artifact's results do not certify the new artifact.
 Each positive result must identify the exact wheel hash, source/runtime identity,
 model, input, topology, precision, and gate policy. Package/import tests, negative
 tests, GPU integration, and production-model acceptance are separate claims.
@@ -16,8 +16,19 @@ Wheel SHA-256:
 - Python 3.10, 3.11, 3.12 and 3.13 installed-wheel checks passed.
 - The full CPU runtime passed 31 packaging/bridge tests and 140 self-tests,
   with zero skipped tests. NumPy-only runs explicitly report optional skips.
-- B200, H800 and A800 GPU regressions have been submitted; no result from rc2
-  is substituted for the new observer's counter checks.
+- Source-distribution rebuilds produce the same 69 package files as the tested
+  wheel; installation and execution from that rebuilt distribution passed.
+- All 30 B200, H800 and A800 native rank-loop comparisons completed: 24 numerical
+  passes and six BF16 MoE numerical failures. The case-by-case outcomes match
+  the matrix below. No result from rc2 substitutes for these new executions.
+- An independent raw-fragment calculation verified all 34,560 reported metrics.
+  All 6,309 actual Adam counter values across 810 rank-step receipts matched
+  their captured step, including the last update.
+- B200, H800 and A800 completed the full Ray entry, native
+  precision/offload/resume, and HF adapter integration tests. All five extended
+  integration tests passed on each device family, within their scopes below.
+- A new three-stage Qwen 256K comparison is running with rc3, unchanged inputs,
+  model computation and frozen numerical gates. There is no numerical verdict yet.
 - Final production-model qualification and GitHub publication are incomplete.
 
 The [rc3 evidence snapshot](evidence/0.3.0rc3-progress.json) is kept separately.
@@ -39,7 +50,7 @@ counts as checked evidence.
 | GPU TP / CP / PP / EP / combined integration | All 30 three-step cases executed; 24 numerical passes and 6 numerical failures, detailed below |
 | BF16 storage and native CPU optimizer offload integration | B200/H800/A800 storage/trajectory/resume checks passed |
 | B200 / H800 / A800 candidate-wheel regression | Complete for the matrix and small full Ray fixture; superseded by the counter fix |
-| Real 256K single-sample full-gradient and update comparison | Running; no numerical conclusion yet |
+| Real 256K single-sample full-gradient and update comparison | Interrupted; incomplete rc2 runs were superseded by fresh rc3 runs, with no numerical conclusion |
 | Public source, distribution, and documentation audit | In progress |
 
 The wheel under test has SHA-256
@@ -48,7 +59,7 @@ The [machine-readable snapshot](evidence/0.3.0rc2-progress.json) records the
 completed numerical matrix and independent metric audit. It is a progress
 record, not a release certificate.
 
-## Native Slime rank-loop matrix
+## Native Slime rank-loop matrix: rc3 and historical rc2
 
 Each case executes reference, repeat, and candidate from identical generated
 weights, with eight variable-length masked examples and three real optimizer
@@ -72,6 +83,8 @@ are retained in the experiment manifests.
 
 The BF16 MoE cases exceed the frozen local gates. In the EP2 case, a third-step
 expert gradient has about 12.6% relative L2 error against a 5% local ceiling.
+For that H800 parameter, maximum absolute error is `1.3268210023e-4`, absolute
+L2 is `6.3246108240e-4`, and RMSE is `1.3975547506e-5`.
 They remain numerical failures; no tolerance was changed after execution.
 Their training-computation root cause has not been established. These findings
 do not establish that another MoE model or production configuration fails.
@@ -79,10 +92,20 @@ do not establish that another MoE model or production configuration fails.
 An independent NumPy implementation reconstructs every canonical element from
 the saved rank fragments. Across all 30 reports, all 34,560 global and
 per-parameter maximum-absolute, absolute-L2, RMSE, and relative-L2 metrics
-matched. This verifies metric arithmetic and fragment coverage, including
+matched independently for each version. This verifies metric arithmetic and fragment coverage, including
 the reported failures. It is not a second proof of the framework's semantic
 parameter mapping. Numerical acceptance of a model and correct operation of
 the validator are separate claims.
+
+The extended suite has five distinct scopes. The full Ray fixture performs
+three actual SFT updates in each of three independent runs. The native storage
+fixture compares FP32 reference parameters with BF16 candidate parameters over
+three steps and a resumed trajectory. The offload fixture checks native CPU
+optimizer offload, TP changes, optimizer state vectors and checkpoint resume.
+The generated Llama and Gemma HF fixtures exercise masked SFT and two backends:
+their FP32 runs use strict gates, while BF16 runs remain `report_only` and have
+their raw outputs checked independently. A successful adapter test does not
+turn those BF16 report-only runs into numerical passes.
 
 ## Reproduce the GPU checks
 

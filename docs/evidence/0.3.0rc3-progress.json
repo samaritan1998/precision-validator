@@ -2,7 +2,7 @@
   "version": "0.3.0rc3",
   "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
   "status": "incomplete",
-  "observed_utc": "2026-10-26T16:38:17.282991+00:00",
+  "observed_utc": "2026-10-26T17:21:43.203639+00:00",
   "cpu": {
     "3.10": {
       "status": "passed",
@@ -59,20 +59,336 @@
   },
   "gpu": {
     "B200": {
-      "status": "submitted"
+      "status": "completed",
+      "matrix": {
+        "tp_fp32": "passed",
+        "pp_fp32": "passed",
+        "ep_fp32": "passed",
+        "tp_bf16": "passed",
+        "ep_bf16": "numerical_failure",
+        "cp2_bf16": "passed",
+        "cp4_bf16": "passed",
+        "tp2_cp2_bf16": "passed",
+        "combined_bf16": "numerical_failure",
+        "cpu_offload_bf16": "passed"
+      },
+      "report_hashes": {
+        "tp_fp32": "3f8c391959e772491f6c686be57ec404dd2f4561db6f3da70ec87504b65929ad",
+        "pp_fp32": "83924dc2a78180d95f42a528c94b3ddc3b3dee78fbb9fcb29acbb782c4f0bd18",
+        "ep_fp32": "fe730b5a4bcd03b56737e772c04cf49be3c09ca7195c7b476be3c083ae49746d",
+        "tp_bf16": "6825955669f3206f5a6d59aa9dcfc60c501dbf671044766fd7f92a04f5fe5487",
+        "ep_bf16": "c662e8269c2420197ea2fc0ac7e8d8a2f08e221f755aef711f06a93d7b793606",
+        "cp2_bf16": "7305caefd6135271b3ab0f24752dc1cd4532d54bc918ac993ce0cfeceddc4dc0",
+        "cp4_bf16": "addca5eb44a9d27f554251307845f5a988a97a78e4fd910eb866e67be687a2e2",
+        "tp2_cp2_bf16": "b0117849f92df92447616a2a121c9fcbea0c588d38a6f3031ccc1f7bc214a579",
+        "combined_bf16": "935fc9fcf808828eb82ff7989273610c52de44a091459e1315a68547b359464f",
+        "cpu_offload_bf16": "d365afb0ce3085d4a3349e3ec07db489d3665597f8c8b0cdc37d6c922f5803a5"
+      },
+      "matrix_record_sha256s": [
+        "a1898ae262b97a87d2b81fa96cb18fad89f16fcb9717a056297ee4a57e9cf7c7",
+        "32f3631f78258dced5ad70d9315436131a32d6b2fa192222dae65b53bbb7292d"
+      ],
+      "extended": {
+        "ray": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "fp32_bf16_storage": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "cpu_offload_resume": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_llama": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_gemma": {
+          "exit_code": 0,
+          "status": "passed"
+        }
+      },
+      "runtime": {
+        "python": "3.12.3",
+        "torch": "2.11.0+cu129",
+        "cuda": "12.9"
+      },
+      "extended_record_sha256": "1f561dd7ae847a35ffe8e10f540e7d28fadaf0ab771a7861245c262dddf8a0ac"
     },
     "H800": {
-      "status": "submitted"
+      "status": "completed",
+      "matrix": {
+        "tp_fp32": "passed",
+        "pp_fp32": "passed",
+        "ep_fp32": "passed",
+        "tp_bf16": "passed",
+        "ep_bf16": "numerical_failure",
+        "cp2_bf16": "passed",
+        "cp4_bf16": "passed",
+        "tp2_cp2_bf16": "passed",
+        "combined_bf16": "numerical_failure",
+        "cpu_offload_bf16": "passed"
+      },
+      "report_hashes": {
+        "tp_fp32": "9da181cdd1641c35a5fe5834f3b3543d33dbb66098e933464273ca2349841301",
+        "pp_fp32": "72557cd2a1832d97f23a4ebceeeb5c8700f804ecf75165f93e575ad6aefd73fa",
+        "ep_fp32": "f26cb1a2cfc9288290c76fe7e2b184b241804d4e0c6d6f61cccc65ada26cb62f",
+        "tp_bf16": "eb1ae77c863760ff325ca818f1a250a8a069ba598ceaf31d1fca368f80870b8c",
+        "ep_bf16": "67961ce5aac6d2bd562624421b6eee106fc6c383f65d46f8ef730aa446d0c352",
+        "cp2_bf16": "7c432653b16a66679b792ae0ee31cd661a1c62dc130a15125adbe080a3be2452",
+        "cp4_bf16": "56258dab507303ef4e1411aff8f16df934a48c2d5a6a909d8c6bf3ae7873a134",
+        "tp2_cp2_bf16": "0cc564c42c0c6f899e3e6938f322ca7c8ad1ed252654e10e45f15499f4eef719",
+        "combined_bf16": "f096859d57995b4b391059657cbfadadab7fd148b9092fdff2a5b8154da00ee2",
+        "cpu_offload_bf16": "9d1d1d31c9d4b4d7f575237bc1a46d46e26c7830b8d3f387a9d194d063ddd2a4"
+      },
+      "matrix_record_sha256s": [
+        "fc48ed6b144cb6f1a143dc2eb24864443c8368ce6be2fd5de1c311300fa7f524"
+      ],
+      "extended": {
+        "ray": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "fp32_bf16_storage": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "cpu_offload_resume": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_llama": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_gemma": {
+          "exit_code": 0,
+          "status": "passed"
+        }
+      },
+      "runtime": {
+        "python": "3.12.3",
+        "torch": "2.11.0+cu129",
+        "cuda": "12.9"
+      },
+      "extended_record_sha256": "5bc1d9c241f074ee880f43d196e257f7bcf9d9a6ffb24cac9a72a22494aa09b1"
     },
     "A800": {
-      "status": "submitted"
+      "status": "completed",
+      "matrix": {
+        "tp_fp32": "passed",
+        "pp_fp32": "passed",
+        "ep_fp32": "passed",
+        "tp_bf16": "passed",
+        "ep_bf16": "numerical_failure",
+        "cp2_bf16": "passed",
+        "cp4_bf16": "passed",
+        "tp2_cp2_bf16": "passed",
+        "combined_bf16": "numerical_failure",
+        "cpu_offload_bf16": "passed"
+      },
+      "report_hashes": {
+        "tp_fp32": "dc208af525f40ce916036936660e61d61dc2806d92920d10a250209f0f6b7048",
+        "pp_fp32": "f59157aa207cc09160ac96031aae388f663a86acf5d587a00b5a03253653c8ae",
+        "ep_fp32": "af3f1ad2a3afba1ec12a90a6d77a3ba8b889b1195e0c96b70f8166ddd443f2be",
+        "tp_bf16": "76098c58b77d4d60ba8678a4a804bba4a7ee482381020f5390da636cf4dff82e",
+        "ep_bf16": "cb208989249f7507ee14c2a789c4987b0101acf9fea67ef7eebc320bc5711122",
+        "cp2_bf16": "2a7b6936d35d529eb592ee601691d3c1f9bf2e9890db18f44b527a601ef46a9e",
+        "cp4_bf16": "cf2e10770b0035d272b04eea1051e62024a5f24d26930041ef75417629b67618",
+        "tp2_cp2_bf16": "685df4ff43e1274c4db071edd2864d3ebd5041349df54e996771db4191a0f5f5",
+        "combined_bf16": "e0a5be947a0c046f24c576b0e93f759f9fea94594d7a0272c1969cf8be1f6f6d",
+        "cpu_offload_bf16": "3101ed820c1b2fa71174d8c82be3ba3e9de8bd30d1ef934522dbf2dbb1cd1aba"
+      },
+      "matrix_record_sha256s": [
+        "661f8a20c7016d350fddac836e64a5393a8bbdc48e138ca8fc0addda1c65e3e9"
+      ],
+      "extended": {
+        "ray": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "fp32_bf16_storage": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "cpu_offload_resume": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_llama": {
+          "exit_code": 0,
+          "status": "passed"
+        },
+        "hf_gemma": {
+          "exit_code": 0,
+          "status": "passed"
+        }
+      },
+      "runtime": {
+        "python": "3.12.3",
+        "torch": "2.11.0+cu129",
+        "cuda": "12.9"
+      },
+      "extended_record_sha256": "1c1aa4cf97330dd84cc14a46357262fa43c539dac8f555d4b7c0034cb2162205"
     }
   },
-  "production_256k": "not_certified_for_rc3",
+  "production_256k": {
+    "status": "running",
+    "precision": "BF16 parameters, FP32 gradients/master/Adam",
+    "sequence_tokens": 262144,
+    "unique_inputs": 1,
+    "batch_contributions": 4,
+    "steps": 1,
+    "reference": {
+      "tp": 1,
+      "pp": 2,
+      "cp": 1,
+      "dp": 4
+    },
+    "candidate": {
+      "tp": 2,
+      "pp": 2,
+      "cp": 2,
+      "dp": 1
+    },
+    "release_qualified": false
+  },
   "github_published": false,
   "regression": {
     "old_receipt_reader": "misses missing and empty final-counter receipts (2 reproduced failures)",
     "rc3_receipt_reader": "rejects missing and empty final-counter receipts",
     "native_group_counter": "freshness and final-step advancement are required; covered in full-runtime tests"
+  },
+  "sdist": {
+    "status": "package_bytes_identical",
+    "package_files": 69,
+    "sdist_sha256": "5c371442b4d121663a36a32991f2b1d3300ea0f49097026f0966f22c02cfc9df",
+    "rebuilt_wheel_sha256": "aa8959f488413f1c48bfa5089b71967312d46166facd009388e2f85497783ef5",
+    "installed_checks": "passed"
+  },
+  "independent_counter_audit": {
+    "status": "all_native_step_counters_match",
+    "rank_step_receipts": 810,
+    "counter_values": 6309,
+    "utc": "2026-10-26T17:13:17.316362+00:00"
+  },
+  "independent_metric_audit": {
+    "reports": 30,
+    "checked_metrics": 34560
+  },
+  "numerical_failure_examples": {
+    "b200": [
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc1.weight_v",
+        "max_abs": 0.00013268210022943094,
+        "absolute_l2": 0.0006324610824004698,
+        "rmse": 1.3975547506311124e-05,
+        "relative_l2": 0.12596218829533948
+      },
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc1.weight_w",
+        "max_abs": 0.00012044038157910109,
+        "absolute_l2": 0.0006100865222051344,
+        "rmse": 1.3481134905055241e-05,
+        "relative_l2": 0.1185774946567591
+      },
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc2.weight",
+        "max_abs": 0.000125399514217861,
+        "absolute_l2": 0.000555809632242471,
+        "rmse": 1.2281773750232888e-05,
+        "relative_l2": 0.11139173504862025
+      }
+    ],
+    "h800": [
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc1.weight_v",
+        "max_abs": 0.00013268210022943094,
+        "absolute_l2": 0.0006324610824004698,
+        "rmse": 1.3975547506311124e-05,
+        "relative_l2": 0.12596218829533948
+      },
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc1.weight_w",
+        "max_abs": 0.00012044038157910109,
+        "absolute_l2": 0.0006100865222051344,
+        "rmse": 1.3481134905055241e-05,
+        "relative_l2": 0.1185774946567591
+      },
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc2.weight",
+        "max_abs": 0.000125399514217861,
+        "absolute_l2": 0.000555809632242471,
+        "rmse": 1.2281773750232888e-05,
+        "relative_l2": 0.11139173504862025
+      }
+    ],
+    "a800": [
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc1.weight_v",
+        "max_abs": 0.00013268210022943094,
+        "absolute_l2": 0.0006324610824004698,
+        "rmse": 1.3975547506311124e-05,
+        "relative_l2": 0.12596218829533948
+      },
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc1.weight_w",
+        "max_abs": 0.00012044038157910109,
+        "absolute_l2": 0.0006100865222051344,
+        "rmse": 1.3481134905055241e-05,
+        "relative_l2": 0.1185774946567591
+      },
+      {
+        "step": 3,
+        "field": "gradients",
+        "parameter": "decoder.layers.1.mlp.experts.experts.3.linear_fc2.weight",
+        "max_abs": 0.000125399514217861,
+        "absolute_l2": 0.000555809632242471,
+        "rmse": 1.2281773750232888e-05,
+        "relative_l2": 0.11139173504862025
+      }
+    ]
+  },
+  "extended_scope": {
+    "ray": "Three real SFT updates per stage through the upstream Slime Ray driver",
+    "fp32_bf16_storage": "Strict native three-step and checkpoint-resume comparison, FP32 reference and BF16 candidate parameter storage",
+    "cpu_offload_resume": "Strict native TP change and CPU optimizer offload with full Adam state vector/resume checks",
+    "hf_llama": "Generated masked SFT; strict FP32, BF16 report_only plus independent raw audit",
+    "hf_gemma": "Generated masked SFT; strict FP32, BF16 report_only plus independent raw audit"
+  },
+  "independent_ray_metric_audit": {
+    "b200": {
+      "status": "independent_metrics_verified",
+      "checked_metrics": 864,
+      "report_sha256": "a982339d261483c6eb4d48f535cfbb903e38884ad8f1a098d95d2a0622ef25f3"
+    },
+    "h800": {
+      "status": "independent_metrics_verified",
+      "checked_metrics": 864,
+      "report_sha256": "51ee337f192f813e4940381d4d722ad7484852a2a619cce30bbcfa93a933bd16"
+    },
+    "a800": {
+      "status": "independent_metrics_verified",
+      "checked_metrics": 864,
+      "report_sha256": "1f3019a2c2198747d30eaabd487993dd19ed7cb1fd5f09393a8c20c1b34d1047"
+    }
   }
 }
