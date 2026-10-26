@@ -1,6 +1,6 @@
 # Precision Validator
 
-[中文说明](README.zh-CN.md) · [Architecture and adapters](docs/architecture.md)
+[中文说明](README.zh-CN.md) · [Architecture and adapters](docs/architecture.md) · [Tested runtimes and storage cost](docs/compatibility.md)
 
 Compare complete training gradients, actual optimizer updates, and declared
 forward observations across implementations, precision settings, and parallel
