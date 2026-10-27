@@ -106,9 +106,23 @@ step three. A TP/PP/EP trace also found a real expert-choice change on its
 failing second step. Both complete reports match their uninstrumented runs;
 another 1,824 metrics per diagnostic were independently verified. See the
 [diagnostic and reproduction steps](moe-diagnostic.md). The first operation
-introducing the difference remains unresolved.
+introducing all combined-case differences remains unresolved. A later complete
+first-step EP2 expert-linear trace found identical input/output/upstream tensors
+but differing native weight gradients. Modeled per-microbatch BF16 rounding
+reproduces almost every native gradient element; FP64 complete-vector replay
+is identical between EP1 and EP2. This identifies an earlier EP2 error source,
+without changing any historical gate or verdict.
 These findings do not establish that another MoE model or production
 configuration fails.
+
+A separate B200 capture-invariance test passed for EP2, TP2/ETP2/PP2/EP2 and
+native CPU optimizer offload. Three steps with capture disabled, disabled again
+and enabled have exactly matching native gradients, weights, full Adam state
+tensors and counters. The independent recorder compares physical rank-local
+states without the canonical mapper. All 2,316 tensor-state snapshots match
+in both comparisons. This is additional generated-fixture coverage, not a
+production Qwen result or a numerical pass for the differing topologies.
+See [its evidence](evidence/0.3.0rc3-observer-invariance.json).
 
 An independent NumPy implementation reconstructs every canonical element from
 the saved rank fragments. Across all 30 reports, all 34,560 global and

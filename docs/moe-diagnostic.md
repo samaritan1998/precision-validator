@@ -60,14 +60,66 @@ The third step also has a changed route, at sample 7, token 2. That position
 is in the masked prompt. A changed route alone is not an acceptance verdict;
 its effect depends on the supervised objective and subsequent computation.
 
-Both diagnostics establish actual forward differences upstream of the gradient
-collector. They support routing sensitivity as an amplification mechanism;
-they do not identify the first GEMM, normalization or reduction operation that
-introduced the difference. No model implementation or acceptance gate was changed.
+Both router diagnostics establish actual forward differences upstream of the
+gradient collector. They support routing sensitivity as an amplification
+mechanism. The later expert-linear replay below localizes an earlier EP2
+difference; it does not establish the same origin for the combined or production
+Qwen case. No historical model implementation or acceptance gate was changed.
 
 These are generated-fixture results. They do not establish that a production
 MoE model fails. The [release validation matrix](validation.md) retains both
 BF16 MoE failures on all three devices.
+
+## First-step expert weight gradients
+
+A separate B200 trace captured every first-step expert linear input, output,
+weight and upstream gradient. It also read the native optimizer's actual
+parameter ranges and gradients, without the validator's canonical mapper.
+All 16 linears have exactly matching inputs, outputs, weights and upstream
+gradients after row alignment. Nevertheless, their native weight gradients
+differ between EP1 and EP2 by 0.2281%–0.2445% relative L2. The reference repeat
+is identical. The instrumented run's complete three-step report matches the
+earlier run, and an independent audit verified all 1,824 report metrics.
+
+The fixture explicitly disables `gradient_accumulation_fusion`. In the tested
+native Megatron implementation, that path returns the BF16 result of
+`grad_output.T @ input`; the DDP buffer subsequently accumulates it in FP32.
+Changing EP changes which tokens enter each microbatch expert GEMM. Therefore
+FP32 gradient storage and reduction alone do not prevent earlier BF16 rounding.
+
+An independent CPU replay provides two checks:
+
+| Replay | Result |
+|---|---|
+| Complete `dY.T @ X` in FP64 with the true supervised-token denominator | Exactly equal between EP1 and EP2 for all 16 linears |
+| Per-microbatch BF16 rounding, followed by rank-local FP32 accumulation and reduction | Reproduces 49,150 of 49,152 reference gradient elements and 49,149 of 49,152 candidate elements exactly |
+| Per-microbatch FP32 rounding and accumulation versus the FP64 calculation | Maximum relative L2 below `6.8e-8` across these linears |
+
+The remaining rounding-replay discrepancies are at most `1.09e-9` on the
+reference and `2.78e-7` on the candidate. CPU FP64 is not the original CUDA
+accumulator, so exact rounding ties can differ. This trace identifies an
+actual source of first-step EP2 weight-gradient differences, before the later
+route change. It does not prove that every model-side difference has this cause.
+See the [complete sanitized replay evidence](evidence/0.3.0rc3-moe-linear.json).
+
+## Does capture change training?
+
+The exact rc3 wheel also passed a separate B200 test with capture disabled,
+disabled again, and enabled, always using the same topology, weights and
+eight masked samples. Each run executes three native optimizer steps.
+EP2, TP2/ETP2/PP2/EP2, and TP2 with native CPU optimizer offload all match
+exactly. An independent recorder compares rank-local gradients, model weights,
+optimizer parameters, full Adam state tensors, counters and step results.
+It does not use canonical parameter mapping. All 2,316 tensor-state snapshots
+match both the disabled repeat and the enabled run, alongside scalar metadata.
+
+Both sides use the same read-only independent recorder; this is an invariance
+check for these generated fixtures and runtime, not a universal guarantee of
+zero instrumentation effects. An initial attempt could not serialize a
+class-valued CPU optimizer option. The recorder was fixed, and all three cases
+passed in a fresh run. No installed library file changed.
+See [invariance evidence](evidence/0.3.0rc3-observer-invariance.json) and
+`tests/gpu_observer_invariance.py` for reproduction.
 
 ## Reproduce the trace
 
@@ -111,3 +163,21 @@ Run with `--cases combined_bf16` and a new output directory. Each stage uses
 eight GPUs, so the launcher reuses that allocation sequentially. Audit its
 completed `combined_bf16` directory using `audit_small_report.py` and
 `audit_combined_router_trace.py` with the same `--results`/`--output` arguments.
+
+The expert-linear patch targets the original release-tag fixture. This avoids
+mixing later test-helper additions into the recorded trace source:
+
+```bash
+mkdir -p test-results/linear-diagnostic
+git show v0.3.0rc3-verified:tests/gpu_slime_matrix.py > test-results/linear-diagnostic/gpu_slime_matrix.py
+patch -d test-results/linear-diagnostic -p0 < tests/moe_linear_trace.patch
+python test-results/linear-diagnostic/gpu_slime_matrix.py launch \
+  --source /path/to/slime-with-precision-check \
+  --wheel dist/precision_validator-0.3.0rc3-py3-none-any.whl \
+  --output /shared/checks/linear-diagnostic --cases ep_bf16
+```
+
+For the completed `ep_bf16` case, run `scripts/audit_linear_trace.py` and
+`scripts/audit_linear_rounding.py`, each with `--results CASE_DIRECTORY` and
+a distinct `--output NEW_JSON_FILE`. Both use NumPy only. The replay does not
+replace native training gradients or change the failed acceptance verdict.

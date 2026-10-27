@@ -111,7 +111,7 @@ def make(output, source, case_name):
     save(output / 'manifest.json', manifest)
 
 
-def worker(path, stage):
+def worker(path, stage, *, capture=True, instrument=None):
     native = helper()
     import numpy as np
     import torch
@@ -168,7 +168,7 @@ def worker(path, stage):
         log_probs_chunk_size=32, recompute_loss_function=False, overlap_grad_reduce=False, align_grad_reduce=False,
         overlap_param_gather=False, align_param_gather=False, reset_optimizer_states=False, manual_gc=False,
         use_distributed_optimizer=True, use_wandb=False, use_tensorboard=False, ci_save_grad_norm=None, ci_load_grad_norm=None,
-        precision_check_steps=3, precision_check_stage=stage, precision_check_manifest=str(path))
+        precision_check_steps=3 if capture else 0, precision_check_stage=stage, precision_check_manifest=str(path))
     global_vars._GLOBAL_ARGS = args
     samples = list(range(ps.get_data_parallel_rank(), len(data['tokens']), layout['dp'])) * 5
     class Iterator(DataIterator):
@@ -193,12 +193,16 @@ def worker(path, stage):
         require(actual == expected, f'Native CP-weighted denominator differs: {actual} != {expected}')
         return result
     setattr(training, finalize_name, finalize)
-    training.train(0, [wrapped], optimizer, scheduler, [iterator], [8 // layout['dp']] * 5, [8] * 5)
-    require(reached_limit(args) and iterator.offset == 3 * 8 // layout['dp'] and scheduler.num_steps == 24,
+    finish = instrument(module, optimizer, training) if instrument else None
+    count = 5 if capture else 3
+    training.train(0, [wrapped], optimizer, scheduler, [iterator], [8 // layout['dp']] * count, [8] * count)
+    require((not capture or reached_limit(args)) and iterator.offset == 3 * 8 // layout['dp'] and scheduler.num_steps == 24,
         'Real Slime loop did not stop at exactly three optimizer steps')
     require(len(denominators) == 3, 'Missing gradient finalization')
     save(Path(manifest['output']) / stage / f'denominator-rank{dist.get_rank()}.json',
         dict(actual=denominators, supervised_units=data['supervised_units'], cp=layout['cp']))
+    if finish:
+        finish()
     ps.destroy_model_parallel()
     dist.destroy_process_group()
 

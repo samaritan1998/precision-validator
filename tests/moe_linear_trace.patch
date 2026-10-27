@@ -1,0 +1,95 @@
+--- gpu_slime_matrix.py
++++ gpu_slime_matrix.py
+@@ -180,6 +180,63 @@
+         loss_masks=[torch.tensor(data['loss_masks'][i], device='cuda') for i in samples],
+         rollout_mask_sums=[sum(data['loss_masks'][i]) for i in samples], max_seq_lens=[64] * len(samples))
+     iterator = Iterator(rollout, [[i] for i in range(len(samples))])
++    # First-step native expert linear inputs/outputs/upstream gradients.
++    import re
++    linear_rows, linear_handles, linear_gradients = {}, [], []
++    ep_rank = ps.get_expert_model_parallel_rank()
++    per_rank_experts = 4 // layout['ep']
++    def global_linear_name(name):
++        match = re.fullmatch(r'(decoder.layers.[0-9]+.mlp.experts.local_experts.)([0-9]+)(.linear_fc[12])', name)
++        if not match:
++            return None
++        return match[1]+str(int(match[2])+ep_rank*per_rank_experts)+match[3]
++    def linear_trace(name):
++        rows = linear_rows.setdefault(name, [])
++        def hook(component, incoming, outgoing):
++            # The fixture has exactly four native microbatches per step.
++            if len(rows) >= 4:
++                return
++            output = outgoing[0] if isinstance(outgoing, tuple) else outgoing
++            row = dict(call=len(rows), input=incoming[0].detach().float().cpu().numpy().copy(),
++                output=output.detach().float().cpu().numpy().copy(),
++                weight=component.weight.detach().float().cpu().numpy().copy())
++            rows.append(row)
++            def upstream(gradient):
++                require('upstream' not in row, 'Native expert backward called twice')
++                row['upstream'] = gradient.detach().float().cpu().numpy().copy()
++            output.register_hook(upstream)
++        return hook
++    for name, component in module.named_modules():
++        global_name = global_linear_name(name)
++        if global_name is not None:
++            linear_handles.append(component.register_forward_hook(linear_trace(global_name)))
++    require(len(linear_handles) == 2*per_rank_experts*2, 'Missing native expert linears')
++    original_prepare = optimizer.prepare_grads
++    native_parameter_names = {p:n for n,p in module.named_parameters()}
++    prepare_count = 0
++    def trace_prepare(*a, **kw):
++        nonlocal prepare_count
++        result = original_prepare(*a, **kw)
++        prepare_count += 1
++        if prepare_count == 1:
++            for inner in getattr(optimizer, 'chained_optimizers', [optimizer]):
++                if getattr(inner, 'is_stub_optimizer', False):
++                    continue
++                for parameter, (group, index) in inner.model_param_group_index_map.items():
++                    name = native_parameter_names[parameter]
++                    global_name = global_linear_name(name.removesuffix('.weight'))
++                    if global_name is None:
++                        continue
++                    actual = inner.optimizer.param_groups[group]['params'][index]
++                    gradient = getattr(actual, 'decoupled_grad', None)
++                    if gradient is None:
++                        gradient = actual.grad
++                    require(gradient is not None and gradient.dtype == torch.float32, 'Missing native gradient')
++                    owned = inner._get_model_param_range_map(parameter)['param']
++                    linear_gradients.append(dict(name=global_name, shape=list(parameter.shape),
++                        start=owned.start, end=owned.end, values=gradient.detach().float().cpu().numpy().copy()))
++        return result
++    optimizer.prepare_grads = trace_prepare
+     # Observe the true denominator after native DP x CP reduction; do not change gradients.
+     denominators = []
+     finalize_name = '_finalize_model_grads' if hasattr(training, '_finalize_model_grads') else 'finalize_model_grads'
+@@ -199,6 +256,28 @@
+     require(len(denominators) == 3, 'Missing gradient finalization')
+     save(Path(manifest['output']) / stage / f'denominator-rank{dist.get_rank()}.json',
+         dict(actual=denominators, supervised_units=data['supervised_units'], cp=layout['cp']))
++    optimizer.prepare_grads = original_prepare
++    for handle in linear_handles:
++        handle.remove()
++    arrays, index = {}, []
++    for name, rows in linear_rows.items():
++        require(len(rows) == 4 and all('upstream' in row for row in rows), 'Expected four expert forward/backward calls')
++        for row in rows:
++            prefix = name+'/'+str(row['call'])
++            index.append(dict(name=name, call=row['call'], prefix=prefix))
++            for field in ('input','output','upstream','weight'):
++                arrays[prefix+'/'+field] = row[field]
++    gradients = []
++    for i,row in enumerate(linear_gradients):
++        values = row.pop('values')
++        prefix = 'native_gradient/'+str(i)
++        arrays[prefix] = values
++        gradients.append(dict(**row, prefix=prefix))
++    folder = Path(manifest['output'])/stage
++    np.savez(folder/f'linear-trace.rank{dist.get_rank()}.npz', **arrays)
++    save(folder/f'linear-trace.rank{dist.get_rank()}.json', dict(rows=index, gradients=gradients,
++        rank=dist.get_rank(), ep_rank=ep_rank, dp_rank=ps.get_data_parallel_rank(),
++        scope='complete_first_step_native_expert_linear_traces'))
+     ps.destroy_model_parallel()
+     dist.destroy_process_group()
+ 

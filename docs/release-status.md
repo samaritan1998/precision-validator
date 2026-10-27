@@ -78,3 +78,21 @@ The wheel's installable filename is
 downloading or copying it; a name ending in `-final.whl` is not a valid wheel
 filename. See [delivery instructions](delivery.md) and the
 [follow-up evidence](evidence/0.3.0rc3-followup-audit.json).
+
+## Capture invariance and first-step MoE replay
+
+Additional B200 tests of the same wheel found exact native-state agreement with
+capture disabled, disabled again and enabled, over three optimizer steps for
+EP2, combined TP2/ETP2/PP2/EP2 and CPU optimizer offload. The independent
+recorder checks gradients, weights and full Adam states without canonical
+mapping. All three cases passed in the completed run; no runtime package file
+changed. [Invariance evidence](evidence/0.3.0rc3-observer-invariance.json).
+
+The EP2 investigation also captured complete first-step expert linear tensors.
+Inputs, outputs, weights and upstream gradients match, while native weight
+gradients differ by about 0.23%–0.24%. A CPU replay of the fixture's BF16
+microbatch weight-gradient rounding reproduces all but two reference and three
+candidate gradient elements out of 49,152. The complete FP64 calculation is
+identical between stages. This localizes an earlier model-side EP2 difference;
+it does not resolve the production Qwen result or rewrite existing failures.
+[Diagnostic and reproduction](moe-diagnostic.md).

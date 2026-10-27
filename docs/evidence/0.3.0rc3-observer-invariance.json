@@ -1,0 +1,266 @@
+{
+  "status": "passed",
+  "created_utc": "2026-10-27T06:24:53.543854+00:00",
+  "version": "0.3.0rc3",
+  "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+  "test_sha256": "2f172e1bd9b0ce31ba46e934bcb7123c2b20d05e2a74bfdf9f8e9378227c50ea",
+  "fixture_sha256": "69d2779d4ec02ed98890873a47f3548210e314bf159fa6fc0ad35360dcd22a44",
+  "device": "CF-NG-BZZ2-O",
+  "capability": [
+    10,
+    0
+  ],
+  "cases": {
+    "ep_bf16": {
+      "status": "passed",
+      "ranks": 2,
+      "steps": 3,
+      "tensor_states_compared": 516,
+      "failures": []
+    },
+    "combined_bf16": {
+      "status": "passed",
+      "ranks": 8,
+      "steps": 3,
+      "tensor_states_compared": 1080,
+      "failures": []
+    },
+    "cpu_offload_bf16": {
+      "status": "passed",
+      "ranks": 2,
+      "steps": 3,
+      "tensor_states_compared": 720,
+      "failures": []
+    }
+  },
+  "comparison": "exact_native_state_hashes",
+  "finished_utc": "2026-10-27T06:30:08.704977+00:00",
+  "scope": "generated_native_Slime_fixtures_on_B200_only",
+  "collector": "native_rank_local_state_without_canonical_parameter_mapping",
+  "modes": [
+    "disabled",
+    "disabled_repeat",
+    "enabled"
+  ],
+  "inputs": "eight_masked_variable_length_generated_samples_per_step",
+  "runtime_package_changed": false,
+  "previous_attempt": "EP2 and combined passed; CPU offload recorder did not serialize class-valued options, fixed in this runner before successful rerun",
+  "native_receipts": [
+    {
+      "case": "ep_bf16",
+      "mode": "disabled",
+      "file": "rank0.json",
+      "sha256": "efcc5ae0518171c585402cb7927f9186c6dae7034b838994326862272612f8eb"
+    },
+    {
+      "case": "ep_bf16",
+      "mode": "disabled",
+      "file": "rank1.json",
+      "sha256": "10bf6670d69a3e7a9624dfefbdedc7a0000c07f4d2e265b09c5203d5a44db8f0"
+    },
+    {
+      "case": "ep_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank0.json",
+      "sha256": "efcc5ae0518171c585402cb7927f9186c6dae7034b838994326862272612f8eb"
+    },
+    {
+      "case": "ep_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank1.json",
+      "sha256": "10bf6670d69a3e7a9624dfefbdedc7a0000c07f4d2e265b09c5203d5a44db8f0"
+    },
+    {
+      "case": "ep_bf16",
+      "mode": "enabled",
+      "file": "rank0.json",
+      "sha256": "efcc5ae0518171c585402cb7927f9186c6dae7034b838994326862272612f8eb"
+    },
+    {
+      "case": "ep_bf16",
+      "mode": "enabled",
+      "file": "rank1.json",
+      "sha256": "10bf6670d69a3e7a9624dfefbdedc7a0000c07f4d2e265b09c5203d5a44db8f0"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank0.json",
+      "sha256": "e4b71ca678ccb2b7a11d7dcd9247c24cfbdaaf9277759304c77018b334ce7815"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank1.json",
+      "sha256": "d96bc25ff205fff5bb1cb8d6cd19d52361e4bdc00e7b5af7bd576a214e8b0206"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank2.json",
+      "sha256": "955dbe5fe23d1c4b413df10e565c112f3b3658f4cac3d3b9f02d080d9f49501c"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank3.json",
+      "sha256": "20a56e9789e2030556f61ef52eb1ccdff31cd2312949666ec6587f237b787391"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank4.json",
+      "sha256": "58d3ca273518f83dd16ddabf502187b09fb8e78f595b71f244222a165f8023b9"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank5.json",
+      "sha256": "4d9f5ae3c199e64fb1741a602c4e5b088bb8c66e0ed52425542c5a0eea884158"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank6.json",
+      "sha256": "2988b2c65d6c3e9dc7ccfdae0280cf63b74872ac28789e9818d7b37ec13ffef0"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled",
+      "file": "rank7.json",
+      "sha256": "aa5428495d0668acfa66ead0d326645482e658fee6bcd927af0962cd334296a8"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank0.json",
+      "sha256": "e4b71ca678ccb2b7a11d7dcd9247c24cfbdaaf9277759304c77018b334ce7815"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank1.json",
+      "sha256": "d96bc25ff205fff5bb1cb8d6cd19d52361e4bdc00e7b5af7bd576a214e8b0206"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank2.json",
+      "sha256": "955dbe5fe23d1c4b413df10e565c112f3b3658f4cac3d3b9f02d080d9f49501c"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank3.json",
+      "sha256": "20a56e9789e2030556f61ef52eb1ccdff31cd2312949666ec6587f237b787391"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank4.json",
+      "sha256": "58d3ca273518f83dd16ddabf502187b09fb8e78f595b71f244222a165f8023b9"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank5.json",
+      "sha256": "4d9f5ae3c199e64fb1741a602c4e5b088bb8c66e0ed52425542c5a0eea884158"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank6.json",
+      "sha256": "2988b2c65d6c3e9dc7ccfdae0280cf63b74872ac28789e9818d7b37ec13ffef0"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank7.json",
+      "sha256": "aa5428495d0668acfa66ead0d326645482e658fee6bcd927af0962cd334296a8"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank0.json",
+      "sha256": "e4b71ca678ccb2b7a11d7dcd9247c24cfbdaaf9277759304c77018b334ce7815"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank1.json",
+      "sha256": "d96bc25ff205fff5bb1cb8d6cd19d52361e4bdc00e7b5af7bd576a214e8b0206"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank2.json",
+      "sha256": "955dbe5fe23d1c4b413df10e565c112f3b3658f4cac3d3b9f02d080d9f49501c"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank3.json",
+      "sha256": "20a56e9789e2030556f61ef52eb1ccdff31cd2312949666ec6587f237b787391"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank4.json",
+      "sha256": "58d3ca273518f83dd16ddabf502187b09fb8e78f595b71f244222a165f8023b9"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank5.json",
+      "sha256": "4d9f5ae3c199e64fb1741a602c4e5b088bb8c66e0ed52425542c5a0eea884158"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank6.json",
+      "sha256": "2988b2c65d6c3e9dc7ccfdae0280cf63b74872ac28789e9818d7b37ec13ffef0"
+    },
+    {
+      "case": "combined_bf16",
+      "mode": "enabled",
+      "file": "rank7.json",
+      "sha256": "aa5428495d0668acfa66ead0d326645482e658fee6bcd927af0962cd334296a8"
+    },
+    {
+      "case": "cpu_offload_bf16",
+      "mode": "disabled",
+      "file": "rank0.json",
+      "sha256": "3668438258ed75b10bc512607593464c118f542424a1675bee9d9fdd5e0bdb96"
+    },
+    {
+      "case": "cpu_offload_bf16",
+      "mode": "disabled",
+      "file": "rank1.json",
+      "sha256": "601ac1b41fa798ca4d92ad1849723356f76684f57cbf4199ff2b7f067532d103"
+    },
+    {
+      "case": "cpu_offload_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank0.json",
+      "sha256": "3668438258ed75b10bc512607593464c118f542424a1675bee9d9fdd5e0bdb96"
+    },
+    {
+      "case": "cpu_offload_bf16",
+      "mode": "disabled_repeat",
+      "file": "rank1.json",
+      "sha256": "601ac1b41fa798ca4d92ad1849723356f76684f57cbf4199ff2b7f067532d103"
+    },
+    {
+      "case": "cpu_offload_bf16",
+      "mode": "enabled",
+      "file": "rank0.json",
+      "sha256": "3668438258ed75b10bc512607593464c118f542424a1675bee9d9fdd5e0bdb96"
+    },
+    {
+      "case": "cpu_offload_bf16",
+      "mode": "enabled",
+      "file": "rank1.json",
+      "sha256": "601ac1b41fa798ca4d92ad1849723356f76684f57cbf4199ff2b7f067532d103"
+    }
+  ]
+}
