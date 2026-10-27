@@ -1,0 +1,1065 @@
+{
+  "scope": "generated_native_MoE_config_control_on_B200_H800_A800",
+  "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+  "changed_model_configuration": "gradient_accumulation_fusion=True in every stage",
+  "historical_gates_unchanged": true,
+  "runtime_package_changed": false,
+  "qualifier": {
+    "status": "failed",
+    "started_utc": "2026-10-27T06:41:18.389845+00:00",
+    "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+    "version": "0.3.0rc3",
+    "test_sha256": "a3bd736a029947d0c92a061073fac7d46d948ce1419f262574d3171abf007fa1",
+    "device": "CF-NG-BZZ2-O",
+    "capability": [
+      10,
+      0
+    ],
+    "cases": {
+      "ep_bf16_fp32_wgrad": {
+        "status": "passed",
+        "report_sha256": "f81cef4e795df05292af0927e23def121548c29d8ca6577ad718c1e034a743df",
+        "manifest_sha256": "2671082b77db7bff9588290c4aaed2e55fd6e2e376d2276958f212ab4ae44382"
+      },
+      "combined_bf16_fp32_wgrad": {
+        "status": "numerical_failure",
+        "report_sha256": "710a5c153d152c51c2c8d962f0c0607d63a6b3b7ed996e65d530a02f68b474d6",
+        "manifest_sha256": "05add51163e0903af0d93d0e104a3ca805253625622671a08338ebdce7f668b4"
+      }
+    },
+    "device_family": "blackwell",
+    "finished_utc": "2026-10-27T06:45:52.089087+00:00"
+  },
+  "cases": {
+    "ep_bf16_fp32_wgrad": {
+      "status": "passed",
+      "report_sha256": "f81cef4e795df05292af0927e23def121548c29d8ca6577ad718c1e034a743df",
+      "steps": [
+        {
+          "step": 1,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.264747926525202e-09,
+              "absolute_l2": 2.358175304833039e-09,
+              "max_abs": 1.1641532182693481e-10,
+              "rmse": 9.642650972058143e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_v",
+              "elements": 2048,
+              "diff2": 3.4865874920950286e-19,
+              "reference2": 5.166820068871052e-05,
+              "actual2": 5.166819826462213e-05,
+              "dot": 5.166819947666616e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.904733264166154e-10,
+              "rmse": 1.3047740413092704e-11,
+              "relative_l2": 8.214641502522961e-08,
+              "cosine": 0.9999999999999971,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 2.763237835330653e-07,
+              "absolute_l2": 3.677385839402334e-08,
+              "max_abs": 3.725290298461914e-09,
+              "rmse": 1.5036943210401548e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_v",
+              "elements": 2048,
+              "diff2": 9.76624753019472e-17,
+              "reference2": 0.0004910598393179359,
+              "actual2": 0.0004910598319442052,
+              "dot": 0.0004910598356310217,
+              "max_abs": 3.725290298461914e-09,
+              "absolute_l2": 9.882432661139018e-09,
+              "rmse": 2.1837297341596304e-10,
+              "relative_l2": 4.4596076836517897e-07,
+              "cosine": 0.9999999999999006,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 2,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.2957017480000345e-09,
+              "absolute_l2": 2.3639200871884313e-09,
+              "max_abs": 2.3283064365386963e-10,
+              "rmse": 9.666141562876373e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.3.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 3.1186821841982523e-19,
+              "reference2": 4.6100167428187555e-05,
+              "actual2": 4.6100165424808626e-05,
+              "dot": 4.6100166426497945e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.584516258547603e-10,
+              "rmse": 1.2340154112704804e-11,
+              "relative_l2": 8.224969730291425e-08,
+              "cosine": 0.9999999999999971,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 3.028376895664771e-07,
+              "absolute_l2": 3.955370118967377e-08,
+              "max_abs": 7.450580596923828e-09,
+              "rmse": 1.6173629434734022e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 1.2159422655631498e-16,
+              "reference2": 0.0004954129085767936,
+              "actual2": 0.0004954129068862605,
+              "dot": 0.0004954129077314664,
+              "max_abs": 7.450580596923828e-09,
+              "absolute_l2": 1.1026977217547653e-08,
+              "rmse": 2.436640739536723e-10,
+              "relative_l2": 4.95419182182167e-07,
+              "cosine": 0.9999999999998774,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 3,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.356385622278971e-09,
+              "absolute_l2": 2.354852039968118e-09,
+              "max_abs": 1.1641532182693481e-10,
+              "rmse": 9.629062040347062e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 3.318081409185399e-19,
+              "reference2": 4.4994629405247596e-05,
+              "actual2": 4.499462705466052e-05,
+              "dot": 4.49946282299539e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.760278994272238e-10,
+              "rmse": 1.2728538557426018e-11,
+              "relative_l2": 8.587429389030669e-08,
+              "cosine": 0.9999999999999969,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 2.9379494409789417e-07,
+              "absolute_l2": 3.7742675193222206e-08,
+              "max_abs": 3.725290298461914e-09,
+              "rmse": 1.5433095363780265e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 9.579624996090916e-17,
+              "reference2": 0.0004317026698637576,
+              "actual2": 0.00043170266308295406,
+              "dot": 0.000431702666473308,
+              "max_abs": 3.725290298461914e-09,
+              "absolute_l2": 9.787555872683903e-09,
+              "rmse": 2.162764727755314e-10,
+              "relative_l2": 4.710661383670411e-07,
+              "cosine": 0.9999999999998891,
+              "finite": true
+            }
+          }
+        }
+      ],
+      "independent_metric_audit": {
+        "status": "independent_metrics_verified",
+        "original_status": "passed",
+        "checked_metrics": 1824,
+        "largest_local_relative_errors": [
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+            "max_abs": 7.450580596923828e-09,
+            "absolute_l2": 1.1026977217547653e-08,
+            "rmse": 2.436640739536723e-10,
+            "relative_l2": 4.954191821821669e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_w",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.787555872683903e-09,
+            "rmse": 2.1627647277553138e-10,
+            "relative_l2": 4.7106613836704104e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.595697199555036e-09,
+            "rmse": 2.1203695500056655e-10,
+            "relative_l2": 4.638221889645958e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 1.0113353380319824e-08,
+            "rmse": 2.2347564861750124e-10,
+            "relative_l2": 4.474252791140281e-07
+          },
+          {
+            "step": 1,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.882432661139018e-09,
+            "rmse": 2.1837297341596304e-10,
+            "relative_l2": 4.459607683651789e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.404526341580692e-09,
+            "rmse": 2.0781263593685063e-10,
+            "relative_l2": 4.2871876406758667e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 8.802633824974578e-09,
+            "rmse": 1.9451256468567502e-10,
+            "relative_l2": 4.278308496934566e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.1.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.058103338956611e-09,
+            "rmse": 2.0015769673952273e-10,
+            "relative_l2": 4.2732465015380935e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.865675350292386e-09,
+            "rmse": 2.180026856617723e-10,
+            "relative_l2": 4.2714128412662984e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.124886326597967e-09,
+            "rmse": 2.0163340622168212e-10,
+            "relative_l2": 4.2264776688266184e-07
+          }
+        ]
+      }
+    },
+    "combined_bf16_fp32_wgrad": {
+      "status": "numerical_failure",
+      "report_sha256": "710a5c153d152c51c2c8d962f0c0607d63a6b3b7ed996e65d530a02f68b474d6",
+      "steps": [
+        {
+          "step": 1,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 0.004312505725703714,
+              "absolute_l2": 0.002384582789091019,
+              "max_abs": 0.00022194534540176392,
+              "rmse": 9.750631983150892e-06
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.mlp.linear_fc1.layer_norm_weight",
+              "elements": 32,
+              "diff2": 1.2264918731804116e-11,
+              "reference2": 8.525345403716867e-08,
+              "actual2": 8.51849587167916e-08,
+              "dot": 8.521307391761424e-08,
+              "max_abs": 1.6125777619890869e-06,
+              "absolute_l2": 3.5021305989074875e-06,
+              "rmse": 6.190950737720974e-07,
+              "relative_l2": 0.011994339730334695,
+              "cosine": 0.9999281197462054,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 0.01083447875211011,
+              "absolute_l2": 0.00144187945889109,
+              "max_abs": 0.0004983283579349518,
+              "rmse": 5.895889223066571e-06
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.self_attention.linear_qkv.weight",
+              "elements": 2048,
+              "diff2": 2.478293623825586e-07,
+              "reference2": 0.0004998904237964769,
+              "actual2": 0.0005004681361123534,
+              "dot": 0.0005000553652732239,
+              "max_abs": 0.00023427605628967285,
+              "absolute_l2": 0.0004978246301485681,
+              "rmse": 1.1000474119366796e-05,
+              "relative_l2": 0.022265834216986528,
+              "cosine": 0.9997524261823241,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 2,
+          "status": "numerical_failure",
+          "gradients": {
+            "global": {
+              "relative_l2": 0.005657778684628515,
+              "absolute_l2": 0.0031134695699002886,
+              "max_abs": 0.00043057557195425034,
+              "rmse": 1.2731072330857973e-05
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_v",
+              "elements": 2048,
+              "diff2": 4.157631876306523e-07,
+              "reference2": 5.6576463403955164e-05,
+              "actual2": 5.617345348660674e-05,
+              "dot": 5.6167076851465654e-05,
+              "max_abs": 0.00012849026825278997,
+              "absolute_l2": 0.0006447970127339707,
+              "rmse": 1.4248135631031852e-05,
+              "relative_l2": 0.08572453117760535,
+              "cosine": 0.9963188834648632,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 0.02005805344981351,
+              "absolute_l2": 0.0026197870267511045,
+              "max_abs": 0.0003102917689830065,
+              "rmse": 1.0712389307238295e-05
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_v",
+              "elements": 2048,
+              "diff2": 1.5669021662693425e-06,
+              "reference2": 0.0005334706604752268,
+              "actual2": 0.0005317871359313319,
+              "dot": 0.0005318454471201447,
+              "max_abs": 0.0003013312816619873,
+              "absolute_l2": 0.0012517596279914697,
+              "rmse": 2.7660241292759945e-05,
+              "relative_l2": 0.05419580491740539,
+              "cosine": 0.9985303333974559,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 3,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 0.005106780494030053,
+              "absolute_l2": 0.002760479333331575,
+              "max_abs": 0.00025301845744252205,
+              "rmse": 1.1287684453459549e-05
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.mlp.router.weight",
+              "elements": 128,
+              "diff2": 9.88052176936164e-11,
+              "reference2": 1.0285156946411903e-06,
+              "actual2": 1.0308175739908003e-06,
+              "dot": 1.0296172317071486e-06,
+              "max_abs": 2.3885222617536783e-06,
+              "absolute_l2": 9.940081372585256e-06,
+              "rmse": 8.7858736801264e-07,
+              "relative_l2": 0.009801317958008364,
+              "cosine": 0.9999526454588126,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 0.012990296721172538,
+              "absolute_l2": 0.0016688120753500328,
+              "max_abs": 0.00018659047782421112,
+              "rmse": 6.823823634984454e-06
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_v",
+              "elements": 2048,
+              "diff2": 5.994148754988022e-07,
+              "reference2": 0.0005170547849938149,
+              "actual2": 0.0005163324707383183,
+              "dot": 0.0005163939204283173,
+              "max_abs": 0.00018659047782421112,
+              "absolute_l2": 0.0007742188808720712,
+              "rmse": 1.7107981899603164e-05,
+              "relative_l2": 0.03404830349557848,
+              "cosine": 0.9994201954999261,
+              "finite": true
+            }
+          }
+        }
+      ],
+      "independent_metric_audit": {
+        "status": "independent_metrics_verified",
+        "original_status": "numerical_failure",
+        "checked_metrics": 1824,
+        "largest_local_relative_errors": [
+          {
+            "step": 2,
+            "field": "gradients",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_v",
+            "max_abs": 0.00012849026825278997,
+            "absolute_l2": 0.0006447970127339707,
+            "rmse": 1.4248135631031852e-05,
+            "relative_l2": 0.08572453117760534
+          },
+          {
+            "step": 2,
+            "field": "gradients",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc2.weight",
+            "max_abs": 0.000125587935144722,
+            "absolute_l2": 0.0004977173379665266,
+            "rmse": 1.0998103274695238e-05,
+            "relative_l2": 0.08559338264432449
+          },
+          {
+            "step": 2,
+            "field": "gradients",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc2.weight",
+            "max_abs": 9.129544196184725e-05,
+            "absolute_l2": 0.0004971163725588628,
+            "rmse": 1.0984823689850939e-05,
+            "relative_l2": 0.06774081754303055
+          },
+          {
+            "step": 2,
+            "field": "gradients",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc1.weight_w",
+            "max_abs": 9.723711264086887e-05,
+            "absolute_l2": 0.00043992396679427896,
+            "rmse": 9.721038128960007e-06,
+            "relative_l2": 0.06738099479765866
+          },
+          {
+            "step": 2,
+            "field": "gradients",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc1.weight_v",
+            "max_abs": 5.458414671011269e-05,
+            "absolute_l2": 0.0004131064917053793,
+            "rmse": 9.128450051158062e-06,
+            "relative_l2": 0.06507437428077811
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_v",
+            "max_abs": 0.0003013312816619873,
+            "absolute_l2": 0.0012517596279914697,
+            "rmse": 2.7660241292759945e-05,
+            "relative_l2": 0.054195804917405395
+          },
+          {
+            "step": 2,
+            "field": "gradients",
+            "parameter": "decoder.layers.1.mlp.router.weight",
+            "max_abs": 1.4617224223911762e-05,
+            "absolute_l2": 4.908456266554126e-05,
+            "rmse": 4.3385033890475325e-06,
+            "relative_l2": 0.054132941247562405
+          },
+          {
+            "step": 2,
+            "field": "gradients",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_w",
+            "max_abs": 6.301519169937819e-05,
+            "absolute_l2": 0.0003850033391407778,
+            "rmse": 8.507452246434629e-06,
+            "relative_l2": 0.05250645384855767
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc2.weight",
+            "max_abs": 0.0003102917689830065,
+            "absolute_l2": 0.001047020283491101,
+            "rmse": 2.313609820301309e-05,
+            "relative_l2": 0.05088790347054269
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc1.weight_w",
+            "max_abs": 0.0003102831542491913,
+            "absolute_l2": 0.000972767659368876,
+            "rmse": 2.1495331514334305e-05,
+            "relative_l2": 0.04555940942685869
+          }
+        ]
+      }
+    }
+  },
+  "device_followups": {
+    "h800": {
+      "qualification": {
+        "status": "passed",
+        "started_utc": "2026-10-27T06:51:56.823343+00:00",
+        "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+        "version": "0.3.0rc3",
+        "test_sha256": "a3bd736a029947d0c92a061073fac7d46d948ce1419f262574d3171abf007fa1",
+        "device": "NVIDIA H800",
+        "capability": [
+          9,
+          0
+        ],
+        "cases": {
+          "ep_bf16_fp32_wgrad": {
+            "status": "passed",
+            "report_sha256": "d2feda0050f8bfdf6646e0d904fa1596cc88f303312a2f4d818e6c3357ea8fd1",
+            "manifest_sha256": "a3bfd61167f11dd95f960c3503e7312526c3e3bfdf5f3ed782e0c5ed78e30002"
+          }
+        },
+        "device_family": "hopper",
+        "finished_utc": "2026-10-27T06:53:29.997241+00:00"
+      },
+      "report_sha256": "d2feda0050f8bfdf6646e0d904fa1596cc88f303312a2f4d818e6c3357ea8fd1",
+      "independent_metric_audit": {
+        "status": "independent_metrics_verified",
+        "original_status": "passed",
+        "checked_metrics": 1824,
+        "largest_local_relative_errors": [
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+            "max_abs": 7.450580596923828e-09,
+            "absolute_l2": 1.1026977217547653e-08,
+            "rmse": 2.436640739536723e-10,
+            "relative_l2": 4.954191821821669e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_w",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.787555872683903e-09,
+            "rmse": 2.1627647277553138e-10,
+            "relative_l2": 4.7106613836704104e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.595697199555036e-09,
+            "rmse": 2.1203695500056655e-10,
+            "relative_l2": 4.638221889645958e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 1.0113353380319824e-08,
+            "rmse": 2.2347564861750124e-10,
+            "relative_l2": 4.474252791140281e-07
+          },
+          {
+            "step": 1,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.882432661139018e-09,
+            "rmse": 2.1837297341596304e-10,
+            "relative_l2": 4.459607683651789e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.404526341580692e-09,
+            "rmse": 2.0781263593685063e-10,
+            "relative_l2": 4.2871876406758667e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 8.802633824974578e-09,
+            "rmse": 1.9451256468567502e-10,
+            "relative_l2": 4.278308496934566e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.1.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.058103338956611e-09,
+            "rmse": 2.0015769673952273e-10,
+            "relative_l2": 4.2732465015380935e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.865675350292386e-09,
+            "rmse": 2.180026856617723e-10,
+            "relative_l2": 4.2714128412662984e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.124886326597967e-09,
+            "rmse": 2.0163340622168212e-10,
+            "relative_l2": 4.2264776688266184e-07
+          }
+        ]
+      },
+      "steps": [
+        {
+          "step": 1,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.264747926525201e-09,
+              "absolute_l2": 2.358175304833039e-09,
+              "max_abs": 1.1641532182693481e-10,
+              "rmse": 9.642650972058143e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_v",
+              "elements": 2048,
+              "diff2": 3.4865874920950286e-19,
+              "reference2": 5.1668200688710544e-05,
+              "actual2": 5.166819826462215e-05,
+              "dot": 5.166819947666619e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.904733264166154e-10,
+              "rmse": 1.3047740413092704e-11,
+              "relative_l2": 8.214641502522959e-08,
+              "cosine": 0.9999999999999972,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 2.763237835330653e-07,
+              "absolute_l2": 3.677385839402334e-08,
+              "max_abs": 3.725290298461914e-09,
+              "rmse": 1.5036943210401548e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_v",
+              "elements": 2048,
+              "diff2": 9.76624753019472e-17,
+              "reference2": 0.000491059839317936,
+              "actual2": 0.0004910598319442052,
+              "dot": 0.0004910598356310217,
+              "max_abs": 3.725290298461914e-09,
+              "absolute_l2": 9.882432661139018e-09,
+              "rmse": 2.1837297341596304e-10,
+              "relative_l2": 4.459607683651789e-07,
+              "cosine": 0.9999999999999004,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 2,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.295701748000034e-09,
+              "absolute_l2": 2.3639200871884313e-09,
+              "max_abs": 2.3283064365386963e-10,
+              "rmse": 9.666141562876373e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.3.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 3.1186821841982523e-19,
+              "reference2": 4.6100167428187575e-05,
+              "actual2": 4.610016542480863e-05,
+              "dot": 4.610016642649795e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.584516258547603e-10,
+              "rmse": 1.2340154112704804e-11,
+              "relative_l2": 8.224969730291424e-08,
+              "cosine": 0.9999999999999969,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 3.028376895664771e-07,
+              "absolute_l2": 3.955370118967377e-08,
+              "max_abs": 7.450580596923828e-09,
+              "rmse": 1.6173629434734022e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 1.2159422655631498e-16,
+              "reference2": 0.0004954129085767939,
+              "actual2": 0.0004954129068862606,
+              "dot": 0.0004954129077314664,
+              "max_abs": 7.450580596923828e-09,
+              "absolute_l2": 1.1026977217547653e-08,
+              "rmse": 2.436640739536723e-10,
+              "relative_l2": 4.954191821821669e-07,
+              "cosine": 0.999999999999877,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 3,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.356385622278969e-09,
+              "absolute_l2": 2.354852039968118e-09,
+              "max_abs": 1.1641532182693481e-10,
+              "rmse": 9.629062040347062e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 3.318081409185399e-19,
+              "reference2": 4.49946294052476e-05,
+              "actual2": 4.499462705466054e-05,
+              "dot": 4.499462822995391e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.760278994272238e-10,
+              "rmse": 1.2728538557426018e-11,
+              "relative_l2": 8.587429389030668e-08,
+              "cosine": 0.9999999999999967,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 2.9379494409789417e-07,
+              "absolute_l2": 3.7742675193222206e-08,
+              "max_abs": 3.725290298461914e-09,
+              "rmse": 1.5433095363780265e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 9.579624996090916e-17,
+              "reference2": 0.0004317026698637576,
+              "actual2": 0.00043170266308295417,
+              "dot": 0.0004317026664733079,
+              "max_abs": 3.725290298461914e-09,
+              "absolute_l2": 9.787555872683903e-09,
+              "rmse": 2.162764727755314e-10,
+              "relative_l2": 4.710661383670411e-07,
+              "cosine": 0.9999999999998889,
+              "finite": true
+            }
+          }
+        }
+      ]
+    },
+    "a800": {
+      "qualification": {
+        "status": "passed",
+        "started_utc": "2026-10-27T06:52:24.054313+00:00",
+        "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+        "version": "0.3.0rc3",
+        "test_sha256": "a3bd736a029947d0c92a061073fac7d46d948ce1419f262574d3171abf007fa1",
+        "device": "NVIDIA A800-SXM4-80GB",
+        "capability": [
+          8,
+          0
+        ],
+        "cases": {
+          "ep_bf16_fp32_wgrad": {
+            "status": "passed",
+            "report_sha256": "3ad44336015b162913dee51aae8de815007b9357ac10014d677915b333c876a4",
+            "manifest_sha256": "c668e9ac656c119c110dfaf2ddadfa37b2733708c3a294a44c9cffcca9306f48"
+          }
+        },
+        "device_family": "ampere",
+        "finished_utc": "2026-10-27T06:54:27.003451+00:00"
+      },
+      "report_sha256": "3ad44336015b162913dee51aae8de815007b9357ac10014d677915b333c876a4",
+      "independent_metric_audit": {
+        "status": "independent_metrics_verified",
+        "original_status": "passed",
+        "checked_metrics": 1824,
+        "largest_local_relative_errors": [
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.1.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 1.0907417641772798e-08,
+            "rmse": 2.4102215561660395e-10,
+            "relative_l2": 5.145678143752782e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.0.linear_fc1.weight_w",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 8.932108524725535e-09,
+            "rmse": 1.9737357837898732e-10,
+            "relative_l2": 4.659939269238833e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 1.0218607798348285e-08,
+            "rmse": 2.2580146464055652e-10,
+            "relative_l2": 4.5530997591517826e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.0.linear_fc1.weight_w",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.441140988197981e-09,
+            "rmse": 2.0862171296540795e-10,
+            "relative_l2": 4.44315516338648e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.38679748707823e-09,
+            "rmse": 2.074208798980581e-10,
+            "relative_l2": 4.347790289369947e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.799375217497573e-09,
+            "rmse": 2.1653764586512288e-10,
+            "relative_l2": 4.335345636057719e-07
+          },
+          {
+            "step": 1,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.3.linear_fc2.weight",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.691149463136268e-09,
+            "rmse": 2.1414617196487576e-10,
+            "relative_l2": 4.315909493558221e-07
+          },
+          {
+            "step": 1,
+            "field": "updates",
+            "parameter": "decoder.layers.0.mlp.experts.experts.1.linear_fc1.weight_w",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.353452223996297e-09,
+            "rmse": 2.066840467216305e-10,
+            "relative_l2": 4.2763023590069506e-07
+          },
+          {
+            "step": 2,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.1.linear_fc1.weight_v",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 8.804104139606542e-09,
+            "rmse": 1.945450543558856e-10,
+            "relative_l2": 4.255593742298263e-07
+          },
+          {
+            "step": 3,
+            "field": "updates",
+            "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc1.weight_w",
+            "max_abs": 3.725290298461914e-09,
+            "absolute_l2": 9.412195755926114e-09,
+            "rmse": 2.079821076522062e-10,
+            "relative_l2": 4.2117379070109567e-07
+          }
+        ]
+      },
+      "steps": [
+        {
+          "step": 1,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.200835345234433e-09,
+              "absolute_l2": 2.322835107910512e-09,
+              "max_abs": 1.1641532182693481e-10,
+              "rmse": 9.498143825575301e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc2.weight",
+              "elements": 2048,
+              "diff2": 2.869767955038269e-19,
+              "reference2": 4.3172032498976816e-05,
+              "actual2": 4.31720317662819e-05,
+              "dot": 4.317203213262921e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.357021518566328e-10,
+              "rmse": 1.1837457008564085e-11,
+              "relative_l2": 8.153088250500336e-08,
+              "cosine": 0.9999999999999966,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 2.904342873712763e-07,
+              "absolute_l2": 3.8651719660913485e-08,
+              "max_abs": 3.725290298461914e-09,
+              "rmse": 1.5804806427926448e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.3.linear_fc2.weight",
+              "elements": 2048,
+              "diff2": 9.391837791684638e-17,
+              "reference2": 0.0005042035807777043,
+              "actual2": 0.0005042036019522853,
+              "dot": 0.0005042035913649478,
+              "max_abs": 3.725290298461914e-09,
+              "absolute_l2": 9.691149463136268e-09,
+              "rmse": 2.1414617196487578e-10,
+              "relative_l2": 4.3159094935582215e-07,
+              "cosine": 0.9999999999999071,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 2,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.212758870689292e-09,
+              "absolute_l2": 2.3182767243153444e-09,
+              "max_abs": 1.1641532182693481e-10,
+              "rmse": 9.479504455586619e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 3.107663388232325e-19,
+              "reference2": 4.47269079878021e-05,
+              "actual2": 4.4726907098538785e-05,
+              "dot": 4.4726907543170285e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.574642040734387e-10,
+              "rmse": 1.231833496778406e-11,
+              "relative_l2": 8.33551711675534e-08,
+              "cosine": 0.9999999999999967,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 2.90798286243972e-07,
+              "absolute_l2": 3.798123191016896e-08,
+              "max_abs": 3.725290298461914e-09,
+              "rmse": 1.553064193522655e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.mlp.experts.experts.1.linear_fc2.weight",
+              "elements": 2048,
+              "diff2": 1.1897175961205647e-16,
+              "reference2": 0.0004493229987922946,
+              "actual2": 0.0004493229931990919,
+              "dot": 0.0004493229959956338,
+              "max_abs": 3.725290298461914e-09,
+              "absolute_l2": 1.0907417641772798e-08,
+              "rmse": 2.4102215561660395e-10,
+              "relative_l2": 5.145678143752782e-07,
+              "cosine": 0.9999999999998677,
+              "finite": true
+            }
+          }
+        },
+        {
+          "step": 3,
+          "status": "passed",
+          "gradients": {
+            "global": {
+              "relative_l2": 4.297504670852103e-09,
+              "absolute_l2": 2.3230238946668127e-09,
+              "max_abs": 1.1641532182693481e-10,
+              "rmse": 9.498915780397923e-12
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.0.mlp.experts.experts.2.linear_fc1.weight_w",
+              "elements": 2048,
+              "diff2": 3.0747236755129983e-19,
+              "reference2": 4.4994629337849103e-05,
+              "actual2": 4.499462814664505e-05,
+              "dot": 4.499462874224693e-05,
+              "max_abs": 8.731149137020111e-11,
+              "absolute_l2": 5.54501909420788e-10,
+              "rmse": 1.225287688538525e-11,
+              "relative_l2": 8.266519732004174e-08,
+              "cosine": 0.9999999999999969,
+              "finite": true
+            }
+          },
+          "updates": {
+            "global": {
+              "relative_l2": 2.967050349166457e-07,
+              "absolute_l2": 3.811652295382542e-08,
+              "max_abs": 3.725290298461914e-09,
+              "rmse": 1.5585962856913377e-10
+            },
+            "largest_local_relative_error": {
+              "parameter": "decoder.layers.1.mlp.experts.experts.2.linear_fc2.weight",
+              "elements": 2048,
+              "diff2": 1.044199453364644e-16,
+              "reference2": 0.0005036967280828577,
+              "actual2": 0.000503696730693586,
+              "dot": 0.0005036967293881697,
+              "max_abs": 3.725290298461914e-09,
+              "absolute_l2": 1.0218607798348285e-08,
+              "rmse": 2.2580146464055655e-10,
+              "relative_l2": 4.553099759151783e-07,
+              "cosine": 0.9999999999998964,
+              "finite": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}

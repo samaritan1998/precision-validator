@@ -124,6 +124,15 @@ in both comparisons. This is additional generated-fixture coverage, not a
 production Qwen result or a numerical pass for the differing topologies.
 See [its evidence](evidence/0.3.0rc3-observer-invariance.json).
 
+A subsequent, separately frozen native configuration enables
+`gradient_accumulation_fusion=True` in all stages. The EP2 fixture then passes
+all three steps on B200, H800 and A800. The combined TP2/ETP2/PP2/EP2 fixture
+still fails on B200 (step-two local gradient relative L2 8.57245%); that new
+combined configuration has not been rerun on H800/A800. All four completed
+reports have independent 1,824-metric audits. These are new configuration
+results; the matrix above remains the original configuration's evidence.
+[Configuration-control results](evidence/0.3.0rc3-moe-fp32-wgrad.json).
+
 An independent NumPy implementation reconstructs every canonical element from
 the saved rank fragments. Across all 30 reports, all 34,560 global and
 per-parameter maximum-absolute, absolute-L2, RMSE, and relative-L2 metrics

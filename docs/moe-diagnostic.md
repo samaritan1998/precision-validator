@@ -102,6 +102,35 @@ actual source of first-step EP2 weight-gradient differences, before the later
 route change. It does not prove that every model-side difference has this cause.
 See the [complete sanitized replay evidence](evidence/0.3.0rc3-moe-linear.json).
 
+## Native FP32 weight-gradient accumulation control
+
+A new B200 experiment sets the native model configuration
+`gradient_accumulation_fusion=True` in all three stages. The tested framework
+then accumulates linear weight gradients directly into the native FP32
+`main_grad` buffer. We kept the rc3 wheel, generated weights, masked inputs,
+optimizer options, step count and frozen acceptance gates unchanged. This is
+a separately identified model configuration, not a rewrite of the old run.
+
+| Configuration | Device | Three-step result |
+|---|---|---|
+| EP2 with native FP32 wgrad accumulation | B200 | passed |
+| EP2 with native FP32 wgrad accumulation | H800 | passed |
+| EP2 with native FP32 wgrad accumulation | A800 | passed |
+| TP2 / ETP2 / PP2 / EP2 with native FP32 wgrad accumulation | B200 | numerical_failure on step 2 |
+
+The EP2 results support the diagnosed rounding source and validate this
+configuration for the generated fixture on these three devices. On B200 the
+largest local gradient relative L2 is `8.58743e-8`, and the largest local update
+relative L2 is `4.95420e-7`. All four new full reports were independently checked,
+1,824 metrics each. [Configuration-control evidence](evidence/0.3.0rc3-moe-fp32-wgrad.json).
+
+The combined case still exceeds gradient and update gates. Native FP32 wgrad
+accumulation does not make all BF16 TP/PP/EP computations equivalent. The
+production Qwen 256K candidate also remains unresolved. The combined configuration
+with FP32 wgrad has not been rerun on H800/A800; their EP2 passes do not cover it.
+This setting requires the compatible native framework's fused wgrad
+implementation and is not a universal model fix.
+
 ## Does capture change training?
 
 The exact rc3 wheel also passed a separate B200 test with capture disabled,
@@ -181,3 +210,10 @@ For the completed `ep_bf16` case, run `scripts/audit_linear_trace.py` and
 `scripts/audit_linear_rounding.py`, each with `--results CASE_DIRECTORY` and
 a distinct `--output NEW_JSON_FILE`. Both use NumPy only. The replay does not
 replace native training gradients or change the failed acceptance verdict.
+
+To reproduce the FP32 wgrad control, make a fresh copy of the same release-tag
+fixture, apply `tests/moe_fp32_wgrad.patch`, and launch it with
+`--cases ep_bf16_fp32_wgrad combined_bf16_fp32_wgrad`. Use a new output directory.
+The EP2 stages run concurrently on disjoint GPU pairs; each combined stage
+requires eight GPUs and those stages run sequentially within the allocation.
+Audit each completed case with `scripts/audit_small_report.py`.

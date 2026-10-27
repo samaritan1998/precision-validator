@@ -96,3 +96,12 @@ candidate gradient elements out of 49,152. The complete FP64 calculation is
 identical between stages. This localizes an earlier model-side EP2 difference;
 it does not resolve the production Qwen result or rewrite existing failures.
 [Diagnostic and reproduction](moe-diagnostic.md).
+
+A separately frozen control enables native FP32 weight-gradient accumulation
+in every stage. EP2 now passes all three steps on B200, H800 and A800; on B200,
+maximum local gradient relative L2 is `8.58743e-8`. The combined TP2/ETP2/PP2/EP2
+case still fails on B200 on step two (maximum local gradient relative L2
+8.57245%). All four complete reports passed independent metric audits. These
+new configuration results are kept
+[separately](evidence/0.3.0rc3-moe-fp32-wgrad.json); the six historical failures
+and production Qwen result remain unchanged.

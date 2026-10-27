@@ -1,0 +1,57 @@
+--- gpu_slime_matrix.py
++++ gpu_slime_matrix.py
+@@ -31,6 +31,9 @@
+     'cpu_offload_bf16': dict(kind='tp', dtype='bfloat16', world=2, target=dict(tp=2, etp=2), offload=True),
+ }
+ 
++CASES['ep_bf16_fp32_wgrad'] = {**CASES['ep_bf16'], 'native_fp32_wgrad': True}
++CASES['combined_bf16_fp32_wgrad'] = {**CASES['combined_bf16'], 'native_fp32_wgrad': True}
++
+ 
+ def helper():
+     require(os.environ.get('MEGATRON_PATH'), 'Set MEGATRON_PATH to the tested framework checkout')
+@@ -40,10 +43,44 @@
+     return megatron_parallel
+ 
+ 
++def native_fp32_wgrad_model(kind, layout, *, dtype=None, position_embedding_type='learned_absolute', sequence_length=16):
++    import torch
++    require(dtype is not None, 'Explicit parameter storage required')
++    from megatron.core import parallel_state as ps
++    from megatron.core.models.gpt import GPTModel
++    from megatron.core.models.gpt.gpt_layer_specs import get_gpt_layer_local_spec
++    from megatron.core.transformer.transformer_config import TransformerConfig
++    moe = kind in ('ep','combined')
++    config = TransformerConfig(num_layers=2,hidden_size=32,num_attention_heads=4,num_query_groups=2,
++        ffn_hidden_size=64,kv_channels=8,tensor_model_parallel_size=layout['tp'],pipeline_model_parallel_size=layout['pp'],
++        context_parallel_size=1,expert_model_parallel_size=layout['ep'],expert_tensor_parallel_size=layout['etp'],
++        sequence_parallel=moe and layout['tp'] > 1,params_dtype=dtype,pipeline_dtype=dtype,bf16=dtype==torch.bfloat16,
++        hidden_dropout=0.0,attention_dropout=0.0,add_bias_linear=False,normalization='RMSNorm',
++        gated_linear_unit=True,activation_func=torch.nn.functional.silu,
++        gradient_accumulation_fusion=True,bias_activation_fusion=False,bias_dropout_fusion=False,
++        masked_softmax_fusion=False,apply_rope_fusion=False,calculate_per_token_loss=True,
++        num_moe_experts=4 if moe else None,moe_router_topk=2,moe_aux_loss_coeff=0.0,
++        moe_router_load_balancing_type='none',moe_token_dispatcher_type='alltoall',
++        moe_grouped_gemm=False,moe_permute_fusion=False,moe_router_dtype='fp32')
++    spec = get_gpt_layer_local_spec(num_experts=config.num_moe_experts,normalization='RMSNorm',moe_grouped_gemm=False)
++    if kind == 'combined':
++        # WrappedTorchNorm deliberately rejects sequence parallel. Select the
++        # framework's supported TE Norm in every stage of this experiment.
++        from megatron.core.extensions.transformer_engine import TENorm
++        spec.submodules.input_layernorm = TENorm
++        spec.submodules.pre_mlp_layernorm = TENorm
++    model = GPTModel(config,spec,vocab_size=64,max_sequence_length=sequence_length,pre_process=ps.is_pipeline_first_stage(),
++        post_process=ps.is_pipeline_last_stage(),share_embeddings_and_output_weights=False,
++        parallel_output=True,position_embedding_type=position_embedding_type).cuda().train()
++    return model, config
++
++
+ def model_for(case, layout):
+     import torch
+     native = helper()
+     dtype = getattr(torch, case['dtype'])
++    if case.get('native_fp32_wgrad'):
++        return native_fp32_wgrad_model(case['kind'], layout, dtype=dtype, position_embedding_type='rope', sequence_length=64)
+     if case['kind'] != 'cp':
+         return native.model_for(case['kind'], layout, dtype=dtype, position_embedding_type='rope', sequence_length=64)
+     from megatron.core import parallel_state as ps
