@@ -10,13 +10,19 @@
 - Document the installable wheel filename and separate delivery status from
   model numerical qualification. The tested wheel and its 69 runtime files
   are unchanged.
+- Complete installed-wheel verification of the updated release tooling in the
+  full native CPU runtime: 44 repository tests, 140 bundled tests, zero skips,
+  and the exported three-stage training example. Preserve GPU failures in the
+  regenerated matrix record.
 
 ## 0.3.0rc3 — unreleased
 
 - Check native fused Adam group counters after every observed update, including
   the final step; record actual counter values and reject missing counters.
 - Add regression cases for nonfresh, frozen and incorrectly advanced group counters.
-- Revalidation is required; rc2 results do not certify the added check.
+- Revalidation completed with exact-wheel CPU and three-device GPU evidence;
+  see `docs/validation.md` for preserved numerical failures and scope. Rc2
+  results do not certify the added check.
 
 ## 0.3.0rc2 — validation candidate
 

@@ -7,9 +7,12 @@ forward observations across implementations, precision settings, and parallel
 topologies. The default installation requires only NumPy; training adapters use
 your existing training environment.
 
-**Release candidate:** `0.3.0rc3`. Final release qualification is in progress.
-See [validation scope](docs/validation.md). Earlier image or development-wheel
-results do not certify this artifact.
+**Release candidate:** `0.3.0rc3`. The recorded verification run is complete:
+44 repository tests and 140 bundled tests passed with zero skips in the full
+CPU runtime. GPU comparisons include preserved model numerical failures.
+See [release status](docs/release-status.md), [validation scope](docs/validation.md),
+and [verified installation](docs/delivery.md). This is not a model-parity
+certificate. Earlier image or development-wheel results do not certify it.
 
 ## Install from source
 

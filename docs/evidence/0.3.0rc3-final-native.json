@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-27T03:35:50.309527+00:00",
+  "status": "installed_wheel_native_cpu_checks_passed",
+  "version": "0.3.0rc3",
+  "tested_source_commit": "72b98962e1056d9ec15bbc2213e0015816514036",
+  "wheel": "precision_validator-0.3.0rc3-py3-none-any.whl",
+  "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+  "scope": "Final source release tooling and exact frozen wheel; native dependencies present, CPU execution only",
+  "gpu_allocated": false,
+  "container_image_id": "sha256:802f050e793afa79f4fc4404f4e2b96367ebab359c78158de0b8ec48afe55717",
+  "runtime": {
+    "status": "environment_inventory",
+    "toolkit_version": "0.3.0rc3",
+    "python": "3.12.3",
+    "platform": "Linux",
+    "packages": {
+      "numpy": "1.26.4",
+      "torch": "2.11.0+cu129",
+      "transformers": "5.6.0",
+      "safetensors": "0.7.0",
+      "transformer-engine": "2.10.0",
+      "fla-core": "0.4.1",
+      "triton": "3.6.0",
+      "megatron-core": "0.16.0rc0"
+    },
+    "megatron_path": null,
+    "slime_importable": true,
+    "bundled_profiles": 6,
+    "gpu_checked": false,
+    "note": "Inventory only. Use doctor for the pinned Qwen runtime; run a frozen experiment for numerical acceptance."
+  },
+  "repository_tests": {
+    "tests_run": 44,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "bundled_selftest": {
+    "status": "selftest_passed",
+    "tests_run": 140,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "gpu_acceptance": false
+  },
+  "checks": [
+    {
+      "name": "install",
+      "returncode": 0
+    },
+    {
+      "name": "installed-import",
+      "returncode": 0
+    },
+    {
+      "name": "installed-files",
+      "returncode": 0
+    },
+    {
+      "name": "environment",
+      "returncode": 0
+    },
+    {
+      "name": "packaging-tests",
+      "returncode": 0
+    },
+    {
+      "name": "selftest",
+      "returncode": 0
+    },
+    {
+      "name": "init",
+      "returncode": 0
+    },
+    {
+      "name": "input",
+      "returncode": 0
+    },
+    {
+      "name": "exported-example-python-api",
+      "returncode": 0
+    }
+  ],
+  "source_checks_sha256": {
+    "scripts/verify_wheel.py": "d6352c6f8ca45ccbcbda213fdface3283d68acc2280b9b057132e38bcf3bb7d9",
+    "scripts/write_release_record.py": "33b4dc87fabfa3b57d4c59c6e95bb8b7de7e23e3f1bf252d3fc10995d2ffb61a",
+    "tests/test_packaging.py": "61b150a924628a70ca4ddba68ed01aa5ac4a8d2e97430dc148c925edad2c626f",
+    "tests/test_release_record.py": "21f366313ecbfd35f1e68c5e8b43a6c999ff35ce2c92fe09f7240f247c838be0",
+    "tests/test_slime_check.py": "79c282d452d27f3c4570e0644f84744c303a1d49db503e40b4243be6fed9c6b2",
+    "tests/test_verification.py": "aa3790109025fde919779801254b01c34e9e843b00a20244355d15146570068a"
+  },
+  "private_log_sha256": {
+    "environment.log": "a936f7c559d4bece83656e78d3db62f2de47b0f6943958f3cf2bf6f973dbe4ba",
+    "exported-example-python-api.log": "dd9d81d93b6bc2af12cf900479259a5f268236a384ef22ba4201905e826fa78d",
+    "init.log": "97cd7ba52c0b1ce9e5d0ed55be00b2b1434abe8acbdda421e80d9b8824450eeb",
+    "input.log": "1de49cc2e92ac5440d3f3e09d88390772274bd5ac6ac7fdbe2e037ebdf7afd05",
+    "install.log": "06b2d97ffad959d9b54f521147ccfa14584878578d13470952b53370311d50cc",
+    "installed-files.log": "a897e52b5ef73d02f40dd0fbfe107324902d0d1be2dde8ade07189b9dc49f9c0",
+    "installed-import.log": "3e389c755fd8fcccae090ab2100c73fb8c43a1e32bfcd08e3cf6269a59626021",
+    "packaging-tests.log": "f4e02ca32d8ea355dbb0f6c3d31369520ee104fa41baf9c7994dca6fcd0aeb24",
+    "selftest.log": "c45755c6f6a484951345a869dee0012a72ab14e7e8c7926dc49bb6c3ceca457a",
+    "summary.json": "cce0d17067465945e8b464887b8d8e80b66887ca8ef5c402800a4a55caf5a713"
+  },
+  "exported_example": {
+    "status": "passed",
+    "trainable_elements": 66,
+    "stages": [
+      "reference",
+      "repeat",
+      "candidate"
+    ],
+    "candidate_relative_l2": {
+      "gradients": 6.688063994626222e-08,
+      "updates": 0.0,
+      "observation/loss": 7.171274856176497e-08,
+      "observation/outputs": 0.0
+    }
+  },
+  "existing_gpu_matrix_recheck": {
+    "status": "numerical_failure",
+    "record_sha256": "b19ef9d7f82f0932a6332d563f60be70540bfcf9fea4ad9f8da4affb1eb08fc0",
+    "missing_gpu_coverage": {},
+    "execution_failures": [],
+    "numerical_failures": [
+      {
+        "device_family": "blackwell",
+        "case": "ep_bf16",
+        "report_sha256": "c662e8269c2420197ea2fc0ac7e8d8a2f08e221f755aef711f06a93d7b793606"
+      },
+      {
+        "device_family": "blackwell",
+        "case": "combined_bf16",
+        "report_sha256": "935fc9fcf808828eb82ff7989273610c52de44a091459e1315a68547b359464f"
+      },
+      {
+        "device_family": "hopper",
+        "case": "ep_bf16",
+        "report_sha256": "67961ce5aac6d2bd562624421b6eee106fc6c383f65d46f8ef730aa446d0c352"
+      },
+      {
+        "device_family": "hopper",
+        "case": "combined_bf16",
+        "report_sha256": "f096859d57995b4b391059657cbfadadab7fd148b9092fdff2a5b8154da00ee2"
+      },
+      {
+        "device_family": "ampere",
+        "case": "ep_bf16",
+        "report_sha256": "cb208989249f7507ee14c2a789c4987b0101acf9fea67ef7eebc320bc5711122"
+      },
+      {
+        "device_family": "ampere",
+        "case": "combined_bf16",
+        "report_sha256": "e0a5be947a0c046f24c576b0e93f759f9fea94594d7a0272c1969cf8be1f6f6d"
+      }
+    ]
+  },
+  "limits": [
+    "No GPU rerun in this CPU audit; existing exact-wheel GPU evidence is reused explicitly.",
+    "Six BF16 MoE matrix cases and the production Qwen TP/CP comparison remain numerical failures.",
+    "Source packaging and native-runtime coverage do not qualify untested models or all topology combinations.",
+    "No GitHub or PyPI publication has taken place."
+  ]
+}

@@ -18,45 +18,6 @@
       "native": true
     },
     {
-      "kind": "cpu",
-      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
-      "selftest": {
-        "status": "selftest_partial",
-        "tests_run": 140,
-        "failures": 0,
-        "errors": 0,
-        "skipped": 50,
-        "gpu_acceptance": false
-      },
-      "native": false
-    },
-    {
-      "kind": "cpu",
-      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
-      "selftest": {
-        "status": "selftest_partial",
-        "tests_run": 140,
-        "failures": 0,
-        "errors": 0,
-        "skipped": 50,
-        "gpu_acceptance": false
-      },
-      "native": false
-    },
-    {
-      "kind": "cpu",
-      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
-      "selftest": {
-        "status": "selftest_partial",
-        "tests_run": 140,
-        "failures": 0,
-        "errors": 0,
-        "skipped": 50,
-        "gpu_acceptance": false
-      },
-      "native": false
-    },
-    {
       "kind": "gpu",
       "device_family": "blackwell",
       "device": "CF-NG-BZZ2-O",

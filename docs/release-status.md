@@ -43,14 +43,21 @@ record's success condition. Eight regression tests cover these cases. The
 model comparison code, policies, and all 69 files in the tested wheel are
 unchanged; this is a source-tooling fix, not a new GPU execution.
 
-The updated repository suite ran 44 tests with no skips under the available
-PyTorch CPU runtime. Its bundled self-test ran 140 tests, with 25 optional
-Megatron-dependent tests skipped. Python 3.10, 3.11 and NumPy-only 3.13
-installed-wheel checks also passed with their explicit optional skips. The
-earlier exact-wheel Python 3.12 native-runtime evidence still supplies the
-zero-skip coverage; none of these partial runs replaces it. The stricter
-release record was checked against the existing GPU evidence and preserved
-all six numerical failures, with no missing or failed executions.
+The final audit installed the exact wheel in an isolated environment inside
+the full Python 3.12 training runtime. All 44 repository tests and 140 bundled
+self-tests passed with zero skips. The exported three-stage training example
+also passed. This used CPU only, with no GPU allocated. The
+[final native evidence](evidence/0.3.0rc3-final-native.json) records the tested
+source commit, test and verifier hashes, installed-wheel identity, runtime
+versions, and log hashes.
+
+Earlier Python 3.10, 3.11 and NumPy-only 3.13 installed-wheel checks passed
+with explicit optional skips. The earlier host Torch check skipped 25
+Megatron-dependent tests; the final native run supplies the missing coverage.
+The stricter release record was regenerated using this zero-skip CPU evidence
+and the existing exact-wheel GPU evidence. It preserved all six numerical
+failures, with no missing or failed executions. No numerical gate or GPU
+runtime code changed.
 
 A separate read-only Qwen audit reconstructed 305 complete small parameters
 (679,424 elements per field) and all 65 forward observations directly from

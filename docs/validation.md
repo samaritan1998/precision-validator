@@ -16,8 +16,11 @@ Wheel SHA-256:
 `0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081`.
 
 - Python 3.10, 3.11, 3.12 and 3.13 installed-wheel checks passed.
-- The full CPU runtime passed 31 packaging/bridge tests and 140 self-tests,
-  with zero skipped tests. NumPy-only runs explicitly report optional skips.
+- The final source tooling and exact wheel passed 44 packaging/bridge tests
+  and 140 self-tests in the full CPU runtime, with zero skipped tests. The
+  exported three-stage training example also passed. NumPy-only runs
+  explicitly report optional skips. See the
+  [final native CPU evidence](evidence/0.3.0rc3-final-native.json).
 - Source-distribution rebuilds produce the same 69 package files as the tested
   wheel; installation and execution from that rebuilt distribution passed.
 - All 30 B200, H800 and A800 native rank-loop comparisons completed: 24 numerical
