@@ -43,7 +43,8 @@ Wheel SHA-256:
   error is 0.0007754334. The raw vectors and full report remain private; the
   sanitized summary is in the [release status](release-status.md).
 - Package qualification evidence is complete, while model-parity qualification
-  remains false and GitHub publication still needs a destination and credentials.
+  remains false. The [public source and verified assets](delivery.md) preserve
+  both the executed coverage and the numerical failures.
 
 The [rc3 evidence snapshot](evidence/0.3.0rc3-progress.json) is kept separately.
 Two counter-receipt counterexamples failed against the old rc2 reader and pass

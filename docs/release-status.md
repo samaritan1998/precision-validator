@@ -10,6 +10,11 @@ The exact wheel is
 `precision_validator-0.3.0rc3-py3-none-any.whl`, SHA-256
 `0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081`.
 
+The source and verified distribution are published through
+[`samaritan1998/precision-validator`](https://github.com/samaritan1998/precision-validator).
+See [delivery instructions](delivery.md) for the release tag, hash verification
+and installation. Public availability does not change any numerical verdict.
+
 The package checks passed across Python 3.10 through 3.13. The complete Python
 3.12 training runtime passed the native CPU self-tests and the generated
 Torch/Slime integration fixtures. B200, H800 and A800 GPU evidence contains 30

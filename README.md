@@ -2,6 +2,8 @@
 
 [中文说明](README.zh-CN.md) · [Architecture and adapters](docs/architecture.md) · [Tested runtimes and storage cost](docs/compatibility.md)
 
+[GitHub repository](https://github.com/samaritan1998/precision-validator) · [Releases](https://github.com/samaritan1998/precision-validator/releases) · [CPU CI](https://github.com/samaritan1998/precision-validator/actions/workflows/ci.yml)
+
 Compare complete training gradients, actual optimizer updates, and declared
 forward observations across implementations, precision settings, and parallel
 topologies. The default installation requires only NumPy; training adapters use
@@ -13,6 +15,14 @@ CPU runtime. GPU comparisons include preserved model numerical failures.
 See [release status](docs/release-status.md), [validation scope](docs/validation.md),
 and [verified installation](docs/delivery.md). This is not a model-parity
 certificate. Earlier image or development-wheel results do not certify it.
+
+## Install the verified distribution
+
+The release assets include the exact GPU-tested wheel and `SHA256SUMS`.
+Download them from the [verified release](https://github.com/samaritan1998/precision-validator/releases/tag/v0.3.0rc3-verified),
+then follow the [hash verification and installation instructions](docs/delivery.md).
+No PyPI publication is claimed. An unrelated package with the same name is not
+this distribution.
 
 ## Install from source
 
@@ -28,8 +38,8 @@ precisionctl selftest
 For a development checkout, use `python -m pip install -e '.[dev]'`.
 Optional extras `torch` and `hf` are available for clean example environments;
 do not use them to overwrite a working distributed training stack.
-No public package-index release is claimed. Install this checkout or its
-verified release wheel, rather than an unrelated package with the same name.
+Use a release tag for a reproducible checkout; `main` may contain later
+documentation or tooling changes.
 
 ## Slime: add validation options to the training command
 

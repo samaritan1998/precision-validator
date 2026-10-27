@@ -4,7 +4,9 @@ Precision Validator 用于比较训练配置变化前后的完整梯度、实际
 
 默认 pip 安装只依赖 NumPy。运行模型时使用已有的 PyTorch、Slime 和 Megatron 环境。
 
-当前版本是 `0.3.0rc3`。本轮验证已执行完：完整 CPU 训练环境下的 44 项仓库测试、140 项内置测试全部通过，零跳过。GPU 对照仍有模型数值超差，详情见[验证记录](docs/validation.md)。当前保留为候选版本，尚未发布到 GitHub 或 PyPI；已验证安装包的用法见[交付说明](docs/delivery.md)。
+当前版本是 `0.3.0rc3`。本轮验证已执行完：完整 CPU 训练环境下的 44 项仓库测试、140 项内置测试全部通过，零跳过。GPU 对照仍有模型数值超差，详情见[验证记录](docs/validation.md)。
+
+源码已发布到 [GitHub](https://github.com/samaritan1998/precision-validator)，[验证版 Release](https://github.com/samaritan1998/precision-validator/releases/tag/v0.3.0rc3-verified) 提供已测 wheel、源码和校验和。当前保留候选版本标记，未发布到 PyPI。安装方法见[交付说明](docs/delivery.md)。
 
 ## 安装与入口
 

@@ -7,11 +7,13 @@ evidence for a production training configuration.
 
 ## Install the tested wheel
 
+Download the wheel and `SHA256SUMS` from the
+[GitHub release](https://github.com/samaritan1998/precision-validator/releases/tag/v0.3.0rc3-verified).
 Keep the distribution's original filename. From a directory containing the
 wheel and its `SHA256SUMS`:
 
 ```bash
-sha256sum -c SHA256SUMS
+sha256sum -c --ignore-missing SHA256SUMS
 python -m pip install ./precision_validator-0.3.0rc3-py3-none-any.whl
 precisionctl --version
 precisionctl env
@@ -53,11 +55,18 @@ substitute its identity for the tested wheel.
 
 ## Publication state
 
-The prepared checkout has no GitHub remote configured. Neither GitHub nor
-PyPI publication is claimed. A repository destination and authenticated write
-access are needed before publishing. `SHA256SUMS` and the delivery manifest
-identify the exact wheel, source archive and Git bundle independently of the
-future repository URL.
+The public repository is
+[`samaritan1998/precision-validator`](https://github.com/samaritan1998/precision-validator).
+The `v0.3.0rc3-verified` release keeps the exact tested wheel and a separately
+identified source snapshot. The source tag includes later release-tooling,
+test and documentation audits; its 69 runtime package files still match the
+wheel byte for byte. `SHA256SUMS` and the delivery manifest identify the wheel,
+source distribution, source archive and Git bundle separately.
+
+This is a GitHub prerelease. No PyPI publication or stable model-parity
+qualification is claimed. The [GitHub CPU workflow](https://github.com/samaritan1998/precision-validator/actions/workflows/ci.yml)
+checks clean public installations. It does not allocate GPUs or replace the
+full native-runtime and GPU evidence in this repository.
 
 `numerical_failure` reports remain failed experiments. Resolving those
 model-side differences requires new frozen comparisons; they are not removed
