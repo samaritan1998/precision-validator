@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+- Publish the validated software distribution with separate software and model numerical verdicts.
+- Revalidate the exact final wheel on B200, H800 and A800, including Ray, precision/offload/resume, HF adapters and capture invariance.
+- Add an independent full-state trajectory metric auditor and negative evidence controls.
+- Preserve all failed numerical comparisons and historical production Qwen findings; no acceptance threshold is relaxed.
+
+
 ## Source tooling audit after 0.3.0rc3
 
 - Reject incomplete CPU check receipts and empty test discovery during release

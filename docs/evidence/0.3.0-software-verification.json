@@ -1,0 +1,512 @@
+{
+  "version": "0.3.0",
+  "wheel_sha256": "c5fefbf9e861e7bc08a41dc6a0ed15fc9a31743ea261f430239f9cd8badc2be8",
+  "plan_sha256": "2e3d59d5fa0f4c4720b8151d4b23037e06677fc80e0c2d9bb4665464e9fcbd14",
+  "updated_utc": "2026-10-27T10:08:12.958599+00:00",
+  "software_verified": true,
+  "model_parity_qualified": false,
+  "threshold_changes": false,
+  "hardware": {
+    "h800": {
+      "device": "NVIDIA H800",
+      "execution_status": "execution_checks_passed",
+      "matrix": {
+        "tp_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "5613a110fb62ec525aa8aa5f0514d70b5b1ead69c06c12b1cfb00472dff0b6b0",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        },
+        "pp_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "1dd17d0481d87fb1722256e450a80196d6f8b6b024c03648ce2ab1d2e8ba5bf2",
+          "checked_metrics": 888,
+          "checked_adam_counters": 135,
+          "rank_steps": 18
+        },
+        "ep_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "93a3d69a88ded1b103a52003429940a35169b8431bd863b2607a9d428be632f1",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        },
+        "tp_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "d431f049de430770e004ea847e48afbe95e0e24cea2dd12f3732c9abdf51ce7f",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        },
+        "ep_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "numerical_failure",
+          "report_sha256": "3d35d626693a634c44af05ffa76afb44e93b940670c9126c380d0d1d9b20eb26",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        },
+        "cp2_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "da195ac958f4d331095c8413611027221dad692b6211e41508cd8d124d85d9a9",
+          "checked_metrics": 888,
+          "checked_adam_counters": 144,
+          "rank_steps": 18
+        },
+        "cp4_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "b4ca1f5c9293155cb2a4398d41cdbebc4eb3a404663bfedc8797d111688439ec",
+          "checked_metrics": 888,
+          "checked_adam_counters": 162,
+          "rank_steps": 36
+        },
+        "tp2_cp2_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "f3f9649c5adc0ba1862d2e27918a0cf9e449a13cbb350cc3a7ef8de3c4c0dc44",
+          "checked_metrics": 888,
+          "checked_adam_counters": 204,
+          "rank_steps": 36
+        },
+        "combined_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "numerical_failure",
+          "report_sha256": "7b10dd0cf93d016dd89c2d56b2153e4ef151306d2d1367e2ed91ce5bfb1ba8a6",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 396,
+          "rank_steps": 72
+        },
+        "cpu_offload_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "7976925f32b001395f91264607b9a016434655b63afb9cbaf4a2fad617b8e53f",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        }
+      },
+      "extended": {
+        "ray": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "c24cdfe63725c593540479e1516eb6fc0ff2eac08668af79873ec0174e3f213c",
+          "checked_metrics": 888,
+          "checked_adam_counters": 186,
+          "rank_steps": 18
+        },
+        "storage": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "3a7dc58d501e9ebbd23d681d459c5adfedbbbfb42455627389f7a845db793d12",
+          "checked_metrics": 3960,
+          "checked_adam_counters": 180,
+          "rank_steps": 12,
+          "exact_resume_state": true
+        },
+        "offload": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "62746bd6c6fd40768e71d4f2f2ce99ba4af9cc81a2309b53c9a438f7fcde2389",
+          "checked_metrics": 3960,
+          "checked_adam_counters": 270,
+          "rank_steps": 18,
+          "exact_resume_state": true
+        },
+        "hf_llama_backend": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "checked_metrics": 352,
+          "report_sha256": "4de6133dd9b7ad7fb605884cc81e92420a00547e5ec5ada3db6b3be9e399cb71"
+        },
+        "hf_llama_mixed": {
+          "status": "independent_metrics_verified",
+          "original_status": "report_only",
+          "checked_metrics": 352,
+          "report_sha256": "ff095e7b0660e93f2ede3c858da55446852fd68181c2aa9601c805cbd70073b1"
+        },
+        "hf_gemma_backend": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "checked_metrics": 480,
+          "report_sha256": "279ae12b4fd0c92c8c0028c0bfb23acc068a33d4710ac5ac6dcabc6398f150da"
+        },
+        "hf_gemma_mixed": {
+          "status": "independent_metrics_verified",
+          "original_status": "report_only",
+          "checked_metrics": 480,
+          "report_sha256": "1c18cbc7dfdccf21a83c6f6a20a27cab285b8771d2032ce28bf855d515cdaa81"
+        }
+      },
+      "fp32_wgrad": {
+        "ep_bf16_fp32_wgrad": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "81bf116104b90ad8bad72c79ea035b4b5df67128932cecf73c2e672416c5c0b0",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        }
+      }
+    },
+    "a800": {
+      "device": "NVIDIA A800-SXM4-80GB",
+      "execution_status": "execution_checks_passed",
+      "matrix": {
+        "tp_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "d9da14409e8602dd1ecf7ba75a97d79fa6ffb49564cd83cc761620f272b16224",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        },
+        "pp_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "c5c163ff1336cd0a51cf03bcd20470b01af486c6eab0596800fb398838d6febc",
+          "checked_metrics": 888,
+          "checked_adam_counters": 135,
+          "rank_steps": 18
+        },
+        "ep_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "9a18539e65a5a5ad7ab9e3313c6bf753c8919beb2e5e5f4563776fbf45d005e2",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        },
+        "tp_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "dc277c5fefcf0ffb424947949e8babf268b505b49f8d3b061b7ade7878513b47",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        },
+        "ep_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "numerical_failure",
+          "report_sha256": "f37f593bfdae63323be1bb02604983e311362f25fdbe73fdabe2bdbcc79bfb4b",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        },
+        "cp2_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "fa13f5480811ac5388a79c4da81a57ff23d6525e06391d609ce20e9371968da1",
+          "checked_metrics": 888,
+          "checked_adam_counters": 144,
+          "rank_steps": 18
+        },
+        "cp4_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "c1166624b9ddc22750e6c7b7bcd3b924599a451ed1e743f652b995658f66dcad",
+          "checked_metrics": 888,
+          "checked_adam_counters": 162,
+          "rank_steps": 36
+        },
+        "tp2_cp2_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "151d99b3d48abec130f8178b1ab92950e4879dafc703962ee6503d3d4c9f5e49",
+          "checked_metrics": 888,
+          "checked_adam_counters": 204,
+          "rank_steps": 36
+        },
+        "combined_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "numerical_failure",
+          "report_sha256": "307deffdd3b2d5a843a8ff3c0fa68fc23886c5403a7909a326d7538637fa2014",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 396,
+          "rank_steps": 72
+        },
+        "cpu_offload_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "1614005d10a8b41cf95a7e3513bfdb0e12cfabce576eb543951ea578b1aae589",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        }
+      },
+      "extended": {
+        "ray": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "2ab2de25fa2086aafc34fcb04992117089229737f4ca0ec17a4adee8c54865bf",
+          "checked_metrics": 888,
+          "checked_adam_counters": 186,
+          "rank_steps": 18
+        },
+        "storage": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "392203864ac37e3cdec88963e5673df4fb74e33a1c82bbbcfd8cf71efc7571cc",
+          "checked_metrics": 3960,
+          "checked_adam_counters": 180,
+          "rank_steps": 12,
+          "exact_resume_state": true
+        },
+        "offload": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "bd22178b00c1cfe1dbcb1b509d4319d6cfb5fcfa18f63ad4786b92f227c4e52d",
+          "checked_metrics": 3960,
+          "checked_adam_counters": 270,
+          "rank_steps": 18,
+          "exact_resume_state": true
+        },
+        "hf_llama_backend": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "checked_metrics": 352,
+          "report_sha256": "f384ea83608f5d5cb4ae94c5608a09f0efa219b976ccdd632661083862727258"
+        },
+        "hf_llama_mixed": {
+          "status": "independent_metrics_verified",
+          "original_status": "report_only",
+          "checked_metrics": 352,
+          "report_sha256": "1a0ae9c1f7081fd9b2228cb4d9fc0591b4670007c441ba626dcba9ef08d65f6a"
+        },
+        "hf_gemma_backend": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "checked_metrics": 480,
+          "report_sha256": "dbe0ffb4ed2a4d5f32f65de93f8b888d124ec1f764eb731d1a615546e9bbff6f"
+        },
+        "hf_gemma_mixed": {
+          "status": "independent_metrics_verified",
+          "original_status": "report_only",
+          "checked_metrics": 480,
+          "report_sha256": "6eba0e3bbcbcb58f233d174d737de01f779d6daf72df79e225000948ac0630cd"
+        }
+      },
+      "fp32_wgrad": {
+        "ep_bf16_fp32_wgrad": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "76f126a4407fc7ce93f0dd04d2179f867c5b778677bb3a009c4842095d7967a8",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        }
+      }
+    },
+    "b200": {
+      "device": "CF-NG-BZZ2-O",
+      "execution_status": "execution_checks_passed_across_attempts",
+      "matrix": {
+        "tp_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "e2d89544205e6bbc296cec615e5f31e20f9f15b39a4dfd8f2e8f07729cc6accd",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        },
+        "pp_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "494a8b0f03964d77d55d4d5d89826b3a9af5ea7f928a72d88947e653e90cfff1",
+          "checked_metrics": 888,
+          "checked_adam_counters": 135,
+          "rank_steps": 18
+        },
+        "ep_fp32": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "c5d36749bab09ded43cc0f05f852cf9a7c823b7fb14efade2f79f8fcb3ccdd2e",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        },
+        "tp_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "b2e1b0134f57c212088569634b54491b7b19e3ccbeec0ff68453c9dc62a32577",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        },
+        "ep_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "numerical_failure",
+          "report_sha256": "8cf1840f574047b4c3f68ac15a06443dc5fbb4421d1a183e245d47ca07a4a8a7",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        },
+        "cp2_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "5c72490bdbc105113c021abcfd2fa4f97fd7b83c7ac39535214969a1cc50d530",
+          "checked_metrics": 888,
+          "checked_adam_counters": 144,
+          "rank_steps": 18
+        },
+        "cp4_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "87afba137716494e43bc083da8f1a60a35815b2382ed156e121fc0e6676c9ca7",
+          "checked_metrics": 888,
+          "checked_adam_counters": 162,
+          "rank_steps": 36
+        },
+        "tp2_cp2_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "565130a4a7ac6f535fac79d31a7a1c11991427e7aae09dac04fcfcb8dca02a23",
+          "checked_metrics": 888,
+          "checked_adam_counters": 204,
+          "rank_steps": 36
+        },
+        "combined_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "numerical_failure",
+          "report_sha256": "bf95bde23fcd322f06580d5846fead976a8b621b680e427f051d66adf5720ec6",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 396,
+          "rank_steps": 72
+        },
+        "cpu_offload_bf16": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "e4f70cb21a58135fcc020fc345a2f0f178a063664a9c4b1d3f92bd2d0ebf7c7c",
+          "checked_metrics": 888,
+          "checked_adam_counters": 180,
+          "rank_steps": 18
+        }
+      },
+      "extended": {
+        "ray": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "1b5c8ccf0f6abdf5afac62f7aeb25bd38ae5042ddb5b8854c78dd9327f9d3237",
+          "checked_metrics": 888,
+          "checked_adam_counters": 186,
+          "rank_steps": 18
+        },
+        "storage": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "d8757734b310a784bc5c9c58564426de62152952e208f66c496526a7c642d088",
+          "checked_metrics": 3960,
+          "checked_adam_counters": 180,
+          "rank_steps": 12,
+          "exact_resume_state": true
+        },
+        "offload": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "04072c1c679fdde7cdc0bcf1bb82129927b3c06982ac7c6cc464d0d47080d013",
+          "checked_metrics": 3960,
+          "checked_adam_counters": 270,
+          "rank_steps": 18,
+          "exact_resume_state": true
+        },
+        "hf_llama_backend": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "checked_metrics": 352,
+          "report_sha256": "e703a67152d11c9aeb05db582d5d69fe4ebed83a64a51f2ab2bc895626007b08"
+        },
+        "hf_llama_mixed": {
+          "status": "independent_metrics_verified",
+          "original_status": "report_only",
+          "checked_metrics": 352,
+          "report_sha256": "c5d29b2e6b4d03a3b5e817219d4d567b7802fefff59689161b68145c250012f3"
+        },
+        "hf_gemma_backend": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "checked_metrics": 480,
+          "report_sha256": "ded17dd3b1364b0b0a2b4e84a47d8b0341f8c45002ad920d69f4ced32f1f8ca4"
+        },
+        "hf_gemma_mixed": {
+          "status": "independent_metrics_verified",
+          "original_status": "report_only",
+          "checked_metrics": 480,
+          "report_sha256": "af16a9fdbe99d21433fa81bfb0fbae3809ccaa7cdca660f5b3d49ace8aac34ed"
+        }
+      },
+      "fp32_wgrad": {
+        "ep_bf16_fp32_wgrad": {
+          "status": "independent_metrics_verified",
+          "original_status": "passed",
+          "report_sha256": "8c43048c2af59c319b489a630b63fcf1a17b5744a4c19630485e91f41f63d628",
+          "checked_metrics": 1848,
+          "checked_adam_counters": 261,
+          "rank_steps": 18
+        }
+      },
+      "execution_note": "Original matrix and extended tasks completed before interruption; remaining tasks use a separate fresh allocation",
+      "invariance": {
+        "status": "exact_native_states_verified",
+        "tensor_snapshots": 2316,
+        "rank_receipts": 36
+      }
+    }
+  },
+  "known_model_findings": [
+    "historical BF16 MoE baseline failures",
+    "combined BF16 TP/PP/EP remains above gates with FP32 wgrad",
+    "production Qwen 256K TP2/CP2 remains above gates"
+  ],
+  "independent_totals": {
+    "metrics": 72240,
+    "adam_counters": 9000,
+    "rank_steps": 1008,
+    "reports": 54
+  },
+  "scope": "Correct validator software under the declared fixtures and integrations; no universal model/topology numerical qualification",
+  "frozen_plan_sha256": "2e3d59d5fa0f4c4720b8151d4b23037e06677fc80e0c2d9bb4665464e9fcbd14",
+  "runtime_source_commit": "c68db5119cba7df04b4e34ab66bd86bf56555cb6",
+  "independent_auditor_source_commit": "c84786a6f37873fc87e7b6f84ceff1de4c29d94a",
+  "cpu": {
+    "status": "passed",
+    "repository_tests": 50,
+    "bundled_selftests": 140,
+    "skips": 0,
+    "failures": 0,
+    "exported_three_stage_example": "passed",
+    "log_sha256": {
+      "environment.log": "a3df67a3ac4459fcab3cae30810874da0b800ea74f63d976ae8cf8ae454441e7",
+      "exported-example-python-api.log": "123de87ef67badb7bf5c65b55b6ec35e2344923bea4dba71074e47e3195d2afc",
+      "init.log": "3c2a1193a831f381024b4fd6dc7ae92a3bc219b56222154415c617c03f2e8959",
+      "input.log": "91852d7f961b59a0067534cefd785a6a82f750bf1a8138e00cc78d606ecf2c06",
+      "install.log": "c7a7971f11e782748374639ab313b54edd12d1aea06c3bbd38708485a75da236",
+      "installed-files.log": "ef3e6b327a0e5508d22a389de259f0da86f1947f725988c7776ab70ad4e31a74",
+      "installed-import.log": "a469d189e809bf2c5aed6d53c02c456993c349fe6bd425e62930e4e76d33eaa0",
+      "packaging-tests.log": "0a571a4868cd342c5d5c019458ea95e34c7542ed933bf09891d1c6208cb7dbc4",
+      "selftest.log": "09ec9719428815a9a54202b8acac6dc40a8bdb65847324716f1a96fcee33402e"
+    }
+  },
+  "package_files_identical_to_frozen_wheel": 69,
+  "capture_invariance_scope": "Generated EP2, combined TP2/ETP2/PP2/EP2, and CPU optimizer offload fixtures; same read-only recorder on all sides",
+  "historical_production_qwen_256k": {
+    "version": "0.3.0rc3",
+    "status": "numerical_failure",
+    "rerun_with_0_3_0": false,
+    "candidate_gradient_relative_l2": 0.8230657,
+    "candidate_update_relative_l2": 0.8739424,
+    "scope": "Historical evidence only; full 256K rerun is not claimed for this version"
+  },
+  "limitations": [
+    "Slime synchronous text SFT, fresh initial weights, bounded first N steps, one model chunk",
+    "Native Slime entry compares gradients/updates/loss and checks Adam counters; full state-vector/resume comparison belongs to the trajectory adapter",
+    "Generated small-model GPU fixtures do not certify pretrained production model accuracy",
+    "HF BF16 compute comparisons remain report_only; backend comparison is separately gated",
+    "No universal model, all-topology, long-run convergence, RL, multimodal, or virtual-pipeline certification"
+  ]
+}

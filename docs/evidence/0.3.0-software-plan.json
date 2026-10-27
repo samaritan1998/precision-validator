@@ -1,0 +1,69 @@
+{
+  "scope": "software correctness; model numerical verdicts preserved",
+  "created_utc": "2026-10-27T07:09:46.259565+00:00",
+  "version": "0.3.0",
+  "wheel_sha256": "c5fefbf9e861e7bc08a41dc6a0ed15fc9a31743ea261f430239f9cd8badc2be8",
+  "previous_version_runtime_changes": [
+    "precision_validator/__init__.py"
+  ],
+  "required_matrix": {
+    "ampere": {
+      "cp2_bf16": "passed",
+      "tp_fp32": "passed",
+      "pp_fp32": "passed",
+      "ep_fp32": "passed",
+      "tp_bf16": "passed",
+      "ep_bf16": "numerical_failure",
+      "cp4_bf16": "passed",
+      "tp2_cp2_bf16": "passed",
+      "combined_bf16": "numerical_failure",
+      "cpu_offload_bf16": "passed"
+    },
+    "hopper": {
+      "cp2_bf16": "passed",
+      "tp_fp32": "passed",
+      "pp_fp32": "passed",
+      "ep_fp32": "passed",
+      "tp_bf16": "passed",
+      "ep_bf16": "numerical_failure",
+      "cp4_bf16": "passed",
+      "tp2_cp2_bf16": "passed",
+      "combined_bf16": "numerical_failure",
+      "cpu_offload_bf16": "passed"
+    },
+    "blackwell": {
+      "cp2_bf16": "passed",
+      "tp_fp32": "passed",
+      "pp_fp32": "passed",
+      "ep_fp32": "passed",
+      "tp_bf16": "passed",
+      "ep_bf16": "numerical_failure",
+      "cp4_bf16": "passed",
+      "tp2_cp2_bf16": "passed",
+      "combined_bf16": "numerical_failure",
+      "cpu_offload_bf16": "passed"
+    }
+  },
+  "required_extended": [
+    "ray",
+    "fp32_bf16_storage",
+    "cpu_offload_resume",
+    "hf_llama",
+    "hf_gemma"
+  ],
+  "required_fp32_wgrad": [
+    "ep_bf16_fp32_wgrad"
+  ],
+  "required_invariance_on_blackwell": [
+    "ep_bf16",
+    "combined_bf16",
+    "cpu_offload_bf16"
+  ],
+  "numerical_thresholds_changed": false,
+  "known_model_findings": [
+    "historical BF16 MoE baseline failures",
+    "combined BF16 TP/PP/EP remains above gates with FP32 wgrad",
+    "production Qwen 256K TP2/CP2 remains above gates"
+  ],
+  "state_at_freeze": "verification_in_progress"
+}
