@@ -1,8 +1,8 @@
 {
   "version": "0.3.0rc3",
   "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
-  "status": "incomplete",
-  "observed_utc": "2026-10-26T20:18:49.353412+00:00",
+  "status": "complete_with_numerical_failures",
+  "observed_utc": "2026-10-27T00:54:29.562764+00:00",
   "cpu": {
     "3.10": {
       "status": "passed",
@@ -283,7 +283,7 @@
     }
   },
   "production_256k": {
-    "status": "training_complete_final_validation_in_progress",
+    "status": "complete_numerical_failure",
     "precision": "BF16 parameters, FP32 gradients/master/Adam",
     "sequence_tokens": 262144,
     "unique_inputs": 1,
@@ -327,6 +327,100 @@
       "native_adam_counter_values": 2460,
       "trainable_elements": 26895998464,
       "raw_bytes": 645503963136
+    },
+    "final_comparison": {
+      "status": "numerical_failure",
+      "name": "release-rc3-q38-256k-tp1-cp1-vs-tp2-cp2",
+      "scope": "full_model_single_step",
+      "plan_sha256": "47e3810c4a1ae4c212ad5be574a6286d3da87a75b6606ceec12a6f4362568e5a",
+      "acceptance_sha256": "be170a6f64a6ed60fc59558e1781c237bc19e732b8d938b97e6f97a6fabba652",
+      "report_md_sha256": "455c145d2bd1161df7e668862b576202ae82cbb88b51e0623312128e7a041065",
+      "finished_utc": "2026-10-27T00:49:00.219071+00:00",
+      "parameters": 1011,
+      "groups": 483,
+      "observations": 65,
+      "trainable_elements": 26895998464,
+      "raw_bytes": 645503963136,
+      "gates": {
+        "total": 3055,
+        "failed": 2680,
+        "failed_categories": {
+          "gradients": 1,
+          "updates": 1,
+          "parameters": 1799,
+          "groups": 852,
+          "observation": 27
+        }
+      },
+      "reference_repeat": {
+        "gradients": {
+          "max_abs": 0.0018312335014343262,
+          "absolute_l2": 0.031713750956129716,
+          "rmse": 1.9337653574206037e-07,
+          "relative_l2": 0.007518897996523083
+        },
+        "updates": {
+          "max_abs": 3.999628825113177e-05,
+          "absolute_l2": 0.13794511211128366,
+          "rmse": 8.411287564038302e-07,
+          "relative_l2": 0.04531545275719043
+        }
+      },
+      "candidate": {
+        "gradients": {
+          "max_abs": 0.1679527461528778,
+          "absolute_l2": 3.4715858213654105,
+          "rmse": 2.1168206832283998e-05,
+          "relative_l2": 0.823065669940149
+        },
+        "updates": {
+          "max_abs": 4.00543212890625e-05,
+          "absolute_l2": 2.6603745695994676,
+          "rmse": 1.6221796619298507e-05,
+          "relative_l2": 0.8739423693958847
+        },
+        "observation/loss": {
+          "max_abs": 0.0007754334431128163,
+          "absolute_l2": 0.0007754334431128163,
+          "rmse": 0.0007754334431128163,
+          "relative_l2": 0.0022595874153101938
+        },
+        "observation/hidden.layer64": {
+          "max_abs": 1.6875,
+          "absolute_l2": 9.895991696880808,
+          "rmse": 0.21867258860719338,
+          "relative_l2": 0.052898612817890794
+        }
+      },
+      "forward_failed_observations": [
+        "observation/hidden.layer36",
+        "observation/hidden.layer39",
+        "observation/hidden.layer40",
+        "observation/hidden.layer41",
+        "observation/hidden.layer42",
+        "observation/hidden.layer43",
+        "observation/hidden.layer44",
+        "observation/hidden.layer45",
+        "observation/hidden.layer46",
+        "observation/hidden.layer47",
+        "observation/hidden.layer48",
+        "observation/hidden.layer49",
+        "observation/hidden.layer50",
+        "observation/hidden.layer51",
+        "observation/hidden.layer52",
+        "observation/hidden.layer53",
+        "observation/hidden.layer54",
+        "observation/hidden.layer55",
+        "observation/hidden.layer56",
+        "observation/hidden.layer57",
+        "observation/hidden.layer58",
+        "observation/hidden.layer59",
+        "observation/hidden.layer60",
+        "observation/hidden.layer61",
+        "observation/hidden.layer62",
+        "observation/hidden.layer63",
+        "observation/hidden.layer64"
+      ]
     }
   },
   "github_published": false,

@@ -1,7 +1,9 @@
 # Release qualification
 
-The `0.3.0rc3` candidate is under validation. It is not a final qualified release.
-It adds a required final-step check for native Adam parameter-group counters.
+The `0.3.0rc3` evidence run is complete. The package and evidence protocol are
+verified, but it is not a numerically qualified model-parity release: required
+GPU cases and the real Qwen candidate contain preserved numerical failures. It
+adds a required final-step check for native Adam parameter-group counters.
 The current rc3 results and the historical rc2 results are recorded separately;
 an older artifact's results do not certify the new artifact.
 Each positive result must identify the exact wheel hash, source/runtime identity,
@@ -27,14 +29,18 @@ Wheel SHA-256:
 - B200, H800 and A800 completed the full Ray entry, native
   precision/offload/resume, and HF adapter integration tests. All five extended
   integration tests passed on each device family, within their scopes below.
-- All three Qwen 256K training steps completed with rc3 and unchanged gates.
-  Full raw validation and comparison remain in progress. Preliminary receipt
-  observations show exact reference-repeat loss and hidden samples, but the
-  combined TP2/CP2 candidate exceeds forward gates: last-layer sampled hidden
-  relative L2 is 5.28986% against a 2% ceiling, with maximum absolute error
-  1.6875. Candidate loss relative error is 0.225959%, maximum absolute error
-  0.0007754334. This configuration cannot be called a numerical pass.
-- Final production-model qualification and GitHub publication are incomplete.
+- The real Qwen 256K TP1/PP2/CP1 versus TP2/PP2/CP2 comparison completed with
+  all 26,895,998,464 gradient and update elements and 65 forward observations.
+  Its complete report is `numerical_failure`: reference-repeat gradient/update
+  relative L2 is 0.7518898%/4.5315453%, while candidate relative L2 is
+  82.30657%/87.39424%. Of 3,055 gates, 2,680 failed; 27 forward hidden
+  observations exceeded their frozen gates. Candidate hidden layer 64 has
+  5.289861% relative L2 and maximum absolute error 1.6875 against a 2%/
+  0.25 gate. Candidate loss relative L2 is 0.225959% and its maximum absolute
+  error is 0.0007754334. The raw vectors and full report remain private; the
+  sanitized summary is in the [release status](release-status.md).
+- Package qualification evidence is complete, while model-parity qualification
+  remains false and GitHub publication still needs a destination and credentials.
 
 The [rc3 evidence snapshot](evidence/0.3.0rc3-progress.json) is kept separately.
 Two counter-receipt counterexamples failed against the old rc2 reader and pass
@@ -55,8 +61,8 @@ counts as checked evidence.
 | GPU TP / CP / PP / EP / combined integration | All 30 three-step cases executed; 24 numerical passes and 6 numerical failures, detailed below |
 | BF16 storage and native CPU optimizer offload integration | B200/H800/A800 storage/trajectory/resume checks passed |
 | B200 / H800 / A800 candidate-wheel regression | Complete for the matrix and small full Ray fixture; superseded by the counter fix |
-| Real 256K single-sample full-gradient and update comparison | Interrupted; incomplete rc2 runs were superseded by fresh rc3 runs, with no numerical conclusion |
-| Public source, distribution, and documentation audit | In progress |
+| Real 256K single-sample full-gradient and update comparison | Complete; rc3 report is numerical_failure with full raw coverage |
+| Public source, distribution, and documentation audit | Complete for the release candidate; model-parity qualification remains false |
 
 The wheel under test has SHA-256
 `4810e067ecc60900c7157739d545ba14db8c769c403df47efc9790f2394da5a8`.
