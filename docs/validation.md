@@ -1,4 +1,10 @@
-# Release qualification
+# Validation scope and evidence
+
+For the current software artifact, see [version 0.3.0 verification](0.3.0-software-release.md).
+The records below preserve the earlier rc3/rc2 executions and their model
+numerical verdicts. They are not executions of a new wheel.
+
+## Historical rc3 verification
 
 The `0.3.0rc3` evidence run is complete. The package and evidence protocol are
 verified, but it is not a numerically qualified model-parity release: required

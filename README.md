@@ -9,17 +9,17 @@ forward observations across implementations, precision settings, and parallel
 topologies. The default installation requires only NumPy; training adapters use
 your existing training environment.
 
-**Release candidate:** `0.3.0rc3`. The recorded verification run is complete:
-44 repository tests and 140 bundled tests passed with zero skips in the full
-CPU runtime. GPU comparisons include preserved model numerical failures.
-See [release status](docs/release-status.md), [validation scope](docs/validation.md),
-and [verified installation](docs/delivery.md). This is not a model-parity
-certificate. Earlier image or development-wheel results do not certify it.
+**Software release:** `0.3.0`. The validator records both numerical passes and
+numerical failures. Its software verification checks capture, mapping, metrics,
+acceptance decisions and supported integrations against independent evidence.
+A software release does not certify that every tested model configuration is
+numerically equivalent. See the [0.3.0 verification record](docs/0.3.0-software-release.md),
+[model findings](docs/moe-diagnostic.md), and [validation scope](docs/validation.md).
 
 ## Install the verified distribution
 
 The release assets include the exact GPU-tested wheel and `SHA256SUMS`.
-Download them from the [verified release](https://github.com/samaritan1998/precision-validator/releases/tag/v0.3.0rc3-verified),
+Download them from the [verified release](https://github.com/samaritan1998/precision-validator/releases/tag/v0.3.0),
 then follow the [hash verification and installation instructions](docs/delivery.md).
 No PyPI publication is claimed. An unrelated package with the same name is not
 this distribution.
@@ -132,7 +132,7 @@ approximately `24 * P * N` bytes for FP32 gradients and updates, plus scratch.
 ```bash
 python -m pip install build
 python -m build
-python scripts/verify_wheel.py --wheel dist/precision_validator-0.3.0rc3-py3-none-any.whl \
+python scripts/verify_wheel.py --wheel dist/precision_validator-0.3.0-py3-none-any.whl \
   --tests tests --evidence ./test-results/installed
 ```
 

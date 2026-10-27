@@ -1,5 +1,12 @@
 # Release status
 
+The current software delivery is described in [version 0.3.0 verification](0.3.0-software-release.md)
+and [installation instructions](delivery.md). Its software verdict and each
+model's numerical verdict have separate scopes. The remainder of this document
+preserves the historical rc3 findings, including failed model comparisons.
+
+## Historical rc3 candidate
+
 `0.3.0rc3` is a reproducible release candidate. The package and its evidence
 protocol are verified, but the recorded model comparisons are not all
 numerical passes. The repository keeps those failures in the release evidence;
