@@ -163,3 +163,10 @@ and matrix status; unfinished cases never count. Five additional CPU tests
 cover failures, incomplete evidence, changed reports and duplicate cases.
 This matrix record does not include production-model qualification or certify
 arbitrary input adapters.
+
+The follow-up release-tooling audit also requires named CPU check receipts,
+nonempty executed test counts and consistent failure/skip counts. Successful
+empty discovery cannot certify the wheel. Eight new negative tests and the
+re-evaluation of the existing matrix are recorded in
+[release status](release-status.md#follow-up-delivery-audit). Runtime package
+bytes and frozen numerical policies did not change.

@@ -1,0 +1,203 @@
+{
+  "created_utc": "2026-10-27T02:22:49.284586+00:00",
+  "version": "0.3.0rc3",
+  "scope": "source_release_tooling_and_read_only_evidence_audit",
+  "runtime_files_unchanged": 69,
+  "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+  "new_gpu_runs": 0,
+  "github_published": false,
+  "model_parity_qualified": false,
+  "fixed_defects": [
+    "empty_cpu_check_list_could_qualify",
+    "missing_or_duplicate_required_cpu_checks",
+    "empty_test_discovery_treated_as_execution_coverage",
+    "misnamed_delivery_wheel"
+  ],
+  "negative_tests_added": 8,
+  "cpu_runs": [
+    {
+      "label": "py310",
+      "python": "3.10.20",
+      "packages": {
+        "numpy": "2.2.6",
+        "torch": null,
+        "transformers": null,
+        "safetensors": null,
+        "transformer-engine": null,
+        "fla-core": null,
+        "triton": null,
+        "megatron-core": null
+      },
+      "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+      "status": "passed",
+      "native_cpu_runtime": false,
+      "packaging_tests": {
+        "tests_run": 44,
+        "skipped": 2
+      },
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 50,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "packaging_log_sha256": "34dcad584012851a9b68d8ea931d72558564bde15bc0fa0451e0c4208debe9e5",
+      "selftest_log_sha256": "adfc0e9c63e36f4d5b73ddbe974c32bcee705b9e0600b27c7d6974e0dac0fd58"
+    },
+    {
+      "label": "py311",
+      "python": "3.11.15",
+      "packages": {
+        "numpy": "2.4.6",
+        "torch": null,
+        "transformers": null,
+        "safetensors": null,
+        "transformer-engine": null,
+        "fla-core": null,
+        "triton": null,
+        "megatron-core": null
+      },
+      "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+      "status": "passed",
+      "native_cpu_runtime": false,
+      "packaging_tests": {
+        "tests_run": 44,
+        "skipped": 2
+      },
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 50,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "packaging_log_sha256": "95d090c9181eda146940b7d04643440c8cae0447a57e3da44bcd373ff48e5c3b",
+      "selftest_log_sha256": "10e97b0a15a0c225e685e313493a628fc409320e7648ee79f0de24da4a984500"
+    },
+    {
+      "label": "cpu-core",
+      "python": "3.13.12",
+      "packages": {
+        "numpy": "2.4.6",
+        "torch": null,
+        "transformers": "5.13.0",
+        "safetensors": "0.8.0",
+        "transformer-engine": null,
+        "fla-core": null,
+        "triton": null,
+        "megatron-core": null
+      },
+      "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+      "status": "passed",
+      "native_cpu_runtime": false,
+      "packaging_tests": {
+        "tests_run": 44,
+        "skipped": 2
+      },
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 50,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "packaging_log_sha256": "28aa6dcf4d487ca9460ae7ca9d78d3b959dd52940a894e3886499ed02a391963",
+      "selftest_log_sha256": "72f40dee557701710d50eb68e924937cebac4c551e5d557599f3b7aaf83d4d0c"
+    },
+    {
+      "label": "cpu-torch-host",
+      "python": "3.13.12",
+      "packages": {
+        "numpy": "2.4.6",
+        "torch": "2.14.1+cpu",
+        "transformers": "5.13.0",
+        "safetensors": "0.8.0",
+        "transformer-engine": null,
+        "fla-core": null,
+        "triton": null,
+        "megatron-core": null
+      },
+      "wheel_sha256": "0a7b0084f21228b3edc54e39faeb76d0a0a873b2740cf6a90f8f7572a0f05081",
+      "status": "passed",
+      "native_cpu_runtime": false,
+      "packaging_tests": {
+        "tests_run": 44,
+        "skipped": 0
+      },
+      "selftest": {
+        "status": "selftest_partial",
+        "tests_run": 140,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 25,
+        "gpu_acceptance": false
+      },
+      "summary_sha256": "f0f50cd681afc4bf6a87c718c92ad6f4adb56bd8aa3593142255ca5f71cdda31",
+      "packaging_log_sha256": "7c7391c994411715ef8904dc6b062d13aa3a0d0357ee2101d5bd03112b48b6d2",
+      "selftest_log_sha256": "4261db19e74f6afa53646e02cdf72606bd67b4b89c3c870d32e83f6f8b9c573c"
+    }
+  ],
+  "matrix_recheck": {
+    "status": "numerical_failure",
+    "missing_gpu_coverage": {},
+    "execution_failures": [],
+    "numerical_failures": [
+      {
+        "device_family": "blackwell",
+        "case": "ep_bf16",
+        "report_sha256": "c662e8269c2420197ea2fc0ac7e8d8a2f08e221f755aef711f06a93d7b793606"
+      },
+      {
+        "device_family": "blackwell",
+        "case": "combined_bf16",
+        "report_sha256": "935fc9fcf808828eb82ff7989273610c52de44a091459e1315a68547b359464f"
+      },
+      {
+        "device_family": "hopper",
+        "case": "ep_bf16",
+        "report_sha256": "67961ce5aac6d2bd562624421b6eee106fc6c383f65d46f8ef730aa446d0c352"
+      },
+      {
+        "device_family": "hopper",
+        "case": "combined_bf16",
+        "report_sha256": "f096859d57995b4b391059657cbfadadab7fd148b9092fdff2a5b8154da00ee2"
+      },
+      {
+        "device_family": "ampere",
+        "case": "ep_bf16",
+        "report_sha256": "cb208989249f7507ee14c2a789c4987b0101acf9fea67ef7eebc320bc5711122"
+      },
+      {
+        "device_family": "ampere",
+        "case": "combined_bf16",
+        "report_sha256": "e0a5be947a0c046f24c576b0e93f759f9fea94594d7a0272c1969cf8be1f6f6d"
+      }
+    ],
+    "record_sha256": "0df85af36621893cc1264a7eea44627436ff343603a037726f2ef39958dea35e"
+  },
+  "qwen_independent_subset": {
+    "status": "independent_subset_metrics_verified",
+    "scope": "Complete selected small parameters and all declared forward observations; not all model vectors",
+    "script_sha256": "fbb7905abae100e8a40f2a8ae5716bbc5e8a725c59295f167d65b382d1ef06d7",
+    "report_sha256": "be170a6f64a6ed60fc59558e1781c237bc19e732b8d938b97e6f97a6fabba652",
+    "full_raw_hashes_rechecked": false,
+    "selected_parameters": 305,
+    "selected_elements_per_field": 679424,
+    "raw_bytes_read": 16306176,
+    "metric_values_verified": 5400,
+    "qkv_gradient_error_square_fraction_from_full_report": 0.41614288547562667,
+    "conclusion": "Selected complete raw gradients/updates and receipt forward values reproduce the report; earliest responsible operation remains unresolved"
+  },
+  "limitations": [
+    "The host Torch run lacks Megatron; its 25 skips do not replace the earlier full Python 3.12 native-runtime evidence.",
+    "Subset audit reproduces selected complete tensors, not all model gradients or their semantic mapping.",
+    "Six generated BF16 MoE cases and the production Qwen candidate remain numerical failures."
+  ]
+}

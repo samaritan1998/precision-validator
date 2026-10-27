@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 import zipfile
 
 
@@ -23,6 +24,41 @@ def check(condition, message):
         raise ValueError(message)
 
 
+CORE_CPU_CHECKS = frozenset({
+    'install', 'installed-import', 'installed-files', 'environment',
+    'packaging-tests', 'selftest',
+})
+NATIVE_CPU_CHECKS = frozenset({'init', 'input', 'exported-example-python-api'})
+
+
+def validate_cpu_checks(summary, selftest):
+    """A successful exit or empty check list does not prove test coverage."""
+    native = summary.get('native_cpu_runtime')
+    check(type(native) is bool, 'CPU runtime scope must be boolean')
+    rows = summary.get('checks')
+    check(isinstance(rows, list) and rows, 'CPU check receipts are missing')
+    names = []
+    for row in rows:
+        check(isinstance(row, dict) and isinstance(row.get('name'), str),
+              'CPU check name is missing')
+        check(type(row.get('returncode')) is int and row['returncode'] == 0,
+              'CPU check failed or has an invalid exit code')
+        names.append(row['name'])
+    check(len(set(names)) == len(names), 'Duplicate CPU check receipt')
+    required = CORE_CPU_CHECKS | (NATIVE_CPU_CHECKS if native else frozenset())
+    check(required <= set(names), f'Missing required CPU checks: {sorted(required - set(names))}')
+    fields = ('tests_run', 'failures', 'errors', 'skipped')
+    check(isinstance(selftest, dict) and
+          all(type(selftest.get(k)) is int and selftest[k] >= 0 for k in fields),
+          'CPU selftest counts are missing or invalid')
+    check(selftest['tests_run'] > selftest['skipped'], 'CPU selftest executed no tests')
+    check(selftest['failures'] == selftest['errors'] == 0, 'CPU selftest contains failures')
+    expected = 'selftest_partial' if selftest['skipped'] else 'selftest_passed'
+    check(selftest.get('status') == expected, 'CPU selftest status disagrees with counts')
+    check(not native or selftest['skipped'] == 0, 'Full CPU runtime has skipped tests')
+    return native
+
+
 def build_record(wheel, cpu_evidence, gpu_evidence, required_coverage):
     wheel_sha = sha(wheel)
     with zipfile.ZipFile(wheel) as archive:
@@ -35,10 +71,18 @@ def build_record(wheel, cpu_evidence, gpu_evidence, required_coverage):
     for folder in cpu_evidence:
         summary = read(folder / 'summary.json')
         check(summary['status'] == 'passed' and summary['wheel_sha256'] == wheel_sha, 'CPU wheel/checks differ')
-        check(all(row['returncode'] == 0 for row in summary['checks']), 'CPU check failed')
         check(read(folder / 'installed-files.log') == files, 'Installed package bytes differ')
         selftest = json.loads((folder / 'selftest.log').read_text().splitlines()[-1])
-        full_cpu |= summary['native_cpu_runtime'] and selftest['skipped'] == 0 and selftest['status'] == 'selftest_passed'
+        full_cpu |= validate_cpu_checks(summary, selftest)
+        # unittest exits zero when discovery finds no tests. Check its actual
+        # run count as well as the recorded process return code.
+        packaging = (folder / 'packaging-tests.log').read_text()
+        run = re.search(r'^Ran (\d+) tests? in ', packaging, re.MULTILINE)
+        outcome = re.search(r'^OK(?: \(skipped=(\d+)\))?\s*$', packaging, re.MULTILINE)
+        check(run is not None and outcome is not None and int(run[1]) > int(outcome[1] or 0),
+              'CPU packaging suite executed no successful tests')
+        check(not summary['native_cpu_runtime'] or not outcome[1],
+              'Full CPU packaging suite has skipped tests')
         records.append(dict(kind='cpu', summary_sha256=sha(folder / 'summary.json'),
                             selftest=selftest, native=summary['native_cpu_runtime']))
     check(full_cpu, 'Full CPU dependency coverage is missing')

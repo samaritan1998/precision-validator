@@ -32,3 +32,37 @@ candidate and diagnostic baseline. It is not a certificate that the tested
 MoE or Qwen candidate topology is numerically equivalent, and it should not be
 promoted to a stable model-parity release until those model-side differences
 are fixed or explicitly accepted as the intended behavior.
+
+## Follow-up delivery audit
+
+The repository's release tooling now rejects empty, incomplete or duplicate
+CPU check lists, nonzero or invalid exit codes, empty test discovery, failed
+self-tests, and skipped tests claimed as complete native-runtime coverage.
+Before this fix, an empty CPU check list could incorrectly satisfy the release
+record's success condition. Eight regression tests cover these cases. The
+model comparison code, policies, and all 69 files in the tested wheel are
+unchanged; this is a source-tooling fix, not a new GPU execution.
+
+The updated repository suite ran 44 tests with no skips under the available
+PyTorch CPU runtime. Its bundled self-test ran 140 tests, with 25 optional
+Megatron-dependent tests skipped. Python 3.10, 3.11 and NumPy-only 3.13
+installed-wheel checks also passed with their explicit optional skips. The
+earlier exact-wheel Python 3.12 native-runtime evidence still supplies the
+zero-skip coverage; none of these partial runs replaces it. The stricter
+release record was checked against the existing GPU evidence and preserved
+all six numerical failures, with no missing or failed executions.
+
+A separate read-only Qwen audit reconstructed 305 complete small parameters
+(679,424 elements per field) and all 65 forward observations directly from
+the saved evidence, without importing the validator. All 5,400 recalculated
+metric values matched. It read about 15.6 MiB of selected raw tensors, not the
+entire 601 GiB dataset, so it is a subset diagnostic. Candidate forward
+differences are already present in layer 1, and layer 36 is the first hidden
+observation to exceed its frozen gate. This narrows the investigation but
+does not identify the responsible operation.
+
+The wheel's installable filename is
+`precision_validator-0.3.0rc3-py3-none-any.whl`. Preserve that filename when
+downloading or copying it; a name ending in `-final.whl` is not a valid wheel
+filename. See [delivery instructions](delivery.md) and the
+[follow-up evidence](evidence/0.3.0rc3-followup-audit.json).

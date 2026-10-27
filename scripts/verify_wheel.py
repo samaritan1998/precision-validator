@@ -8,11 +8,23 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import site
 import subprocess
 import sys
 import tempfile
 import venv
+
+
+def check_packaging_log(path, native=False):
+    text = path.read_text()
+    run = re.search(r'^Ran (\d+) tests? in ', text, re.MULTILINE)
+    outcome = re.search(r'^OK(?: \(skipped=(\d+)\))?\s*$', text, re.MULTILINE)
+    if run is None or outcome is None or int(run[1]) <= int(outcome[1] or 0):
+        raise RuntimeError('Packaging suite did not execute any successful tests')
+    if native and outcome[1]:
+        raise RuntimeError('Full CPU packaging suite has skipped tests')
+    return {'tests_run': int(run[1]), 'skipped': int(outcome[1] or 0)}
 
 
 def main():
@@ -81,6 +93,7 @@ print(json.dumps(records, indent=2))
             run("installed-files", [python, "-c", verify])
             run("environment", [command, "env"])
             run("packaging-tests", [python, "-m", "unittest", "discover", "-s", str(Path(args.tests).resolve()), "-v"])
+            check_packaging_log(evidence / 'packaging-tests.log', args.native)
             run("selftest", [command, "selftest"] + (["--require-all"] if args.native else []), timeout=600)
             if args.native:
                 run("init", [command, "init", "--adapter", "torch", "--output", str(root / "template")])

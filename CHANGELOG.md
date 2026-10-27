@@ -1,5 +1,16 @@
 # Changelog
 
+## Source tooling audit after 0.3.0rc3
+
+- Reject incomplete CPU check receipts and empty test discovery during release
+  verification, including a reproduced false qualification with no checks.
+- Add eight regression tests for release evidence and executed test coverage.
+- Recheck the existing numerical matrix without changing its failures, and
+  independently audit selected complete production Qwen tensors.
+- Document the installable wheel filename and separate delivery status from
+  model numerical qualification. The tested wheel and its 69 runtime files
+  are unchanged.
+
 ## 0.3.0rc3 — unreleased
 
 - Check native fused Adam group counters after every observed update, including
